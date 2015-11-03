@@ -1,4 +1,4 @@
-# AMCS SecC - OpenSSH Module - Version 1.0.1
+# AMCS SecC - OpenSSH Module - Version 1.0.2
 
 ####Table of Contents
 
