@@ -46,4 +46,4 @@ Das Modul kontrolliert sowohl die /etc/ssh/sshd_config als auch die /etc/ssh/ssh
 
 ##Release Notes/Contributors/Etc **Optional**
 - Initialrelease.
-- v1.0.1 - added Allow/Deny User/Group Definitions
+- Vielen Dank an Markus Kaloski für die Übermittlung seiner gehärteten Version.

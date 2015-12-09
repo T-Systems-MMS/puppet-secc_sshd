@@ -1,4 +1,4 @@
-# secc_sshd config
+# SecC Linux SSH Hardening
 class secc_sshd {
 
   include secc_sshd::install
