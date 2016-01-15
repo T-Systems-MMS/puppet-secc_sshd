@@ -1,4 +1,4 @@
-# AMCS SecC - OpenSSH Module - Version 1.0.2
+# AMCS SecC - OpenSSH Module - Version 1.0.3
 
 ####Table of Contents
 
@@ -47,3 +47,4 @@ Das Modul kontrolliert sowohl die /etc/ssh/sshd_config als auch die /etc/ssh/ssh
 ##Release Notes/Contributors/Etc **Optional**
 - Initialrelease.
 - Vielen Dank an Markus Kaloski für die Übermittlung seiner gehärteten Version.
+- 1.0.3: Roaming Feature aufgrund CVE-2016-0777 und CVE-2016-0778 deaktiviert.
