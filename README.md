@@ -1,4 +1,4 @@
-# AMCS SecC - OpenSSH Module - Version 1.0.3
+# AMCS SecC - OpenSSH Module - Version 1.1.0
 
 ####Table of Contents
 
@@ -12,6 +12,10 @@
 ##Overview
 
 Dieses Modul bietet eine hochgradige Abdeckung der SoC Anforderungen für SSH, Server und Client, dar.
+
+##Important
+Zur Flexibilitaet sind einige Settings konfigurierbar, aber mit sicheren Default-Werten versehen. Bei Abweichung von den Defaultwerten kann die generelle SoC-Compliance nicht mehr
+durch das Modul bereitgestellt werden und die Projekte müssen wieder selbst prüfen.
 
 ##Module Description
 Das Modul kontrolliert sowohl die /etc/ssh/sshd_config als auch die /etc/ssh/ssh_config .
@@ -44,7 +48,9 @@ Das Modul kontrolliert sowohl die /etc/ssh/sshd_config als auch die /etc/ssh/ssh
 ##Development
 - Änderungen am Modul sollten auch im Serverspec Script secc_ssh_spec.rb nachgezogen werden.
 
-##Release Notes/Contributors/Etc **Optional**
+##Release Notes/Contributors/Etc
 - Initialrelease.
 - Vielen Dank an Markus Kaloski für die Übermittlung seiner gehärteten Version.
 - 1.0.3: Roaming Feature aufgrund CVE-2016-0777 und CVE-2016-0778 deaktiviert.
+- 1.1.0: Added Parameters (Admininterface - default first; AllowUsers, AllowGroups, DenyUser, DenyGroups, KexAlgorithm, Ciphers and MACs for more flexibility.
+ - Adjusted KexAlgorithms from 'diffie-hellman-group-exchange-sha256' to 'diffie-hellman-group-exchange-sha256, diffie-hellman-group14-sha1' because SCB needs the latter.

@@ -22,16 +22,16 @@ Protocol 2
 # Req 2 Der SSH Dienst muss nicht benoetigte Transport-Verschluesselungsverfahren deaktiveren
 #	MACs muss fuer XenServer geprueft werden. Eventuell nur "MACs hmac-sha1" moeglich.
 ############################
-Ciphers aes256-ctr
-MACs hmac-sha2-512,hmac-sha2-256
-KexAlgorithms diffie-hellman-group-exchange-sha256
+Ciphers <%= @sshd_Ciphers %>
+<% if @virtual != "xen0" -%>MACs <%= @sshd_MACs %><% end %>
+<% if @virtual == "xen0" -%>MACs hmac-sha1<% end %>
+<% if @virtual != "xen0" -%>KexAlgorithms <%= @sshd_KexAlgorithms %><% end %>
 
 ############################
 # Req 3 Der SSH-Serverdienst muss ausschliesslich an die Schnittstellen und/oder IP-Adressen gebunden werden, auf denen dieser Dienst erforderlich ist.
 # 	Getestet fuer XenServer und virtuelle Server. Physische Systeme muessten auch funktionieren. VMWare-Hosts muss geprueft werden.
 ############################
-<% if virtual != "xen0" %>ListenAddress <%= ipaddress_eth0 %> <% end %>
-<% if virtual == "xen0" %>ListenAddress <%= ipaddress_xenbr0 %> <% end %>
+ListenAddress <%= @adminip %>
 
 ############################
 # Req 4 Der SSH-Serverdienst muss als Stand-Alone Daemon ausgefuehrt werden.
@@ -58,7 +58,7 @@ X11UseLocalhost yes
 ############################
 # Req 9 SSH-„Agent Forwarding“ muss serverseitig deaktiviert werden.
 ############################
-AllowAgentForwarding no
+<% if @virtual != "xen0" -%>AllowAgentForwarding no<% end -%>
 
 ############################
 # Req 10 Tunnel Devices duerfen nicht benutzt werden („tunnel device forwarding“).
@@ -68,9 +68,10 @@ PermitTunnel no
 ############################
 # Req 11 Die Nutzung des SSH-Dienstes muss auf Gruppen (bzw. Benutzer) beschraenkt werden.
 ############################
-AllowUsers root rootuser
-# AllowGroups
-# DenyUsers
+AllowUsers <%= @sshd_AllowUsers %>
+AllowGroups <%= @sshd_AllowGroups %>
+DenyUsers <%= @sshd_DenyUsers %>
+DenyGroups <%= @sshd_DenyGroups %>
 
 ############################
 # Req 12 SSH-Logins muessen aufgezeichnet werden.
@@ -111,7 +112,7 @@ IgnoreRhosts yes
 # Req 21 Fuer SSH-Clients gilt, dass die Verwendung eines SSH-Authentifizierungsagenten.
 # 	Wird am Client geloest.
 ############################
-AllowAgentForwarding no
+<% if @virtual != "xen0" -%>AllowAgentForwarding no<% end -%>
 
 ############################
 # Warning-Banner vor dem Login und Hinweis nach dem Login
@@ -134,8 +135,8 @@ AcceptEnv XMODIFIERS
 
 # override default of no subsystems
 <%# SLES 11 and 12 are using a different location %>
-<% if operatingsystem == "SLES" -%><% if operatingsystemrelease == "12.0" -%>Subsystem       sftp    /usr/lib/ssh/sftp-server<%- else -%>Subsystem       sftp    /usr/lib64/ssh/sftp-server<%- end -%><% end -%>
-<%# now RedHat or CentOS %><% if operatingsystem != "SLES" -%>Subsystem       sftp    /usr/libexec/openssh/sftp-server<% end -%>
+<% if @operatingsystem == "SLES" -%><% if @operatingsystemrelease == "12.0" -%>Subsystem       sftp    /usr/lib/ssh/sftp-server<%- else -%>Subsystem       sftp    /usr/lib64/ssh/sftp-server<%- end -%><% end -%>
+<%# now RedHat or CentOS %><% if @operatingsystem != "SLES" -%>Subsystem       sftp    /usr/libexec/openssh/sftp-server<% end -%>
 
 
 

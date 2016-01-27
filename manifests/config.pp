@@ -1,5 +1,25 @@
 # config
-class secc_sshd::config {
+class secc_sshd::config (
+  $admininterface_nr,
+  $admininterface_xen0,
+  $sshd_AllowUsers,
+  $sshd_AllowGroups,
+  $sshd_DenyUsers,
+  $sshd_DenyGroups,
+  $sshd_KexAlgorithms,
+  $sshd_Ciphers,
+  $sshd_MACs
+) {
+
+  if ( $::virtual == 'xen0' ) {
+    $string = "@ipaddress_${admininterface_xen0}"
+    $adminip = inline_template("<%= ${string} %>")
+  }
+  else {
+    $ifs = split($interfaces, ',')
+    $string = "@ipaddress_${ifs[$admininterface_nr]}"
+    $adminip = inline_template("<%= ${string} %>")
+  }
 
   file { '/etc/ssh/sshd_config':
     ensure  => present,
@@ -29,4 +49,5 @@ class secc_sshd::config {
     mode    => '0644',
     content => template('secc_sshd/default_motd.erb'),
   }
+
 }
