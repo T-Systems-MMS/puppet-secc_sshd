@@ -35,6 +35,7 @@ class secc_sshd (
     sshd_KexAlgorithms  => $sshd_KexAlgorithms,
     sshd_Ciphers        => $sshd_Ciphers,
     sshd_MACs           => $sshd_MACs,
+    servicename         => $servicename,
     require             => Class['secc_sshd::install'],
     notify              => Class['secc_sshd::service'],
   }
