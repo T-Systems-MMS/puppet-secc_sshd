@@ -18,7 +18,7 @@ Zur Flexibilitaet sind einige Settings konfigurierbar, aber mit sicheren Default
 durch das Modul bereitgestellt werden und die Projekte müssen wieder selbst prüfen.
 
 ##Module Description
-Das Modul kontrolliert sowohl die /etc/ssh/sshd_config als auch die /etc/ssh/ssh_config .
+Das Modul kontrolliert sowohl die /etc/ssh/sshd_config, /etc/ssh/ssh_config, /etc/issue und /etc/motd.
 
 ###sshd_config
 - SoC Requirements 1 - 12 werden ohne Einschränkungen erfüllt.

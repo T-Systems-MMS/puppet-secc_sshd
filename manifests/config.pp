@@ -8,7 +8,8 @@ class secc_sshd::config (
   $sshd_DenyGroups,
   $sshd_KexAlgorithms,
   $sshd_Ciphers,
-  $sshd_MACs
+  $sshd_MACs,
+  $servicename
 ) {
 
   if ( $::virtual == 'xen0' ) {
