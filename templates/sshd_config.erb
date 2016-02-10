@@ -1,0 +1,153 @@
+########################################
+### MANAGED BY PUPPET ['secc_sshd']  ###
+###   DON'T CHANGE THIS FILE HERE    ###
+###   DO IT ON THE PUPPET MASTER!    ###
+########################################
+
+#       $OpenBSD: sshd_config,v 1.80 2008/07/02 02:24:18 djm Exp $
+
+############################
+# Network - Portdefinition, DNS und ausschliesslich IPv4
+############################
+Port 22
+AddressFamily inet
+UseDNS no
+
+############################
+# Req 1 Es muss ausschliesslich die Protokollversion SSH-2 eingesetzt werden.
+############################
+Protocol 2
+
+############################
+# Req 2 Der SSH Dienst muss nicht benoetigte Transport-Verschluesselungsverfahren deaktiveren
+#	MACs muss fuer XenServer geprueft werden. Eventuell nur "MACs hmac-sha1" moeglich.
+############################
+Ciphers <%= @sshd_Ciphers %>
+<% if @virtual != "xen0" -%>MACs <%= @sshd_MACs %><% end %>
+<% if @virtual == "xen0" -%>MACs hmac-sha1<% end %>
+<% if @virtual != "xen0" -%>KexAlgorithms <%= @sshd_KexAlgorithms %><% end %>
+
+############################
+# Req 3 Der SSH-Serverdienst muss ausschliesslich an die Schnittstellen und/oder IP-Adressen gebunden werden, auf denen dieser Dienst erforderlich ist.
+# 	Getestet fuer XenServer und virtuelle Server. Physische Systeme muessten auch funktionieren. VMWare-Hosts muss geprueft werden.
+############################
+ListenAddress <%= @adminip %>
+
+############################
+# Req 4 Der SSH-Serverdienst muss als Stand-Alone Daemon ausgefuehrt werden.
+# Req 5 Als SSH-Server-Software muss OpenSSH zum Einsatz kommen.
+# Beide Anforderungen werden via OpenSSH erfuellt.
+############################
+
+############################
+# Req 6 TCP/IP-Port-Weiterleitungen („Port Forwarding“) muessen kontrolliert eingesetzt werden.
+############################
+AllowTcpForwarding no
+
+############################
+# Req 7 Gateway-Ports duerfen nicht aktiviert werden.
+############################
+GatewayPorts no
+
+############################
+# Req 8 X11-Weiterleitungen muessen kontrolliert eingesetzt werden („X11-Forwarding“).
+############################
+X11Forwarding no
+X11UseLocalhost yes
+
+############################
+# Req 9 SSH-„Agent Forwarding“ muss serverseitig deaktiviert werden.
+############################
+<% if @virtual != "xen0" -%>AllowAgentForwarding no<% end -%>
+
+############################
+# Req 10 Tunnel Devices duerfen nicht benutzt werden („tunnel device forwarding“).
+############################
+PermitTunnel no
+
+############################
+# Req 11 Die Nutzung des SSH-Dienstes muss auf Gruppen (bzw. Benutzer) beschraenkt werden.
+############################
+AllowUsers <%= @sshd_AllowUsers %>
+AllowGroups <%= @sshd_AllowGroups %>
+DenyUsers <%= @sshd_DenyUsers %>
+DenyGroups <%= @sshd_DenyGroups %>
+
+############################
+# Req 12 SSH-Logins muessen aufgezeichnet werden.
+############################
+SyslogFacility AUTHPRIV
+LogLevel VERBOSE
+
+############################
+# Req 13 Die Authentifizierung an Server-Systemen muss mittels asymmetrischer Kryptoverfahren (Publickey,OTP) erfolgen.
+# 	OTP wird kuenftig durch Serviceshell erfuellt und muss nicht dezentral erfolgen.
+# 	Public Key Authentication ist bis dahin empfohlen
+# Req 14 Eine Passwort-Authentifizierung (Passwortabfrage) darf nicht durch den SSH-Dienst angeboten werden.
+# Req 15 Die Authentifizierungsinformationen der SSH-Benutzer (oeffentliche SSH-Schluessel im Authorized-KeysFile) muessen kontrolliert und geschuetzt werden.
+#	Abweichung: Wird nicht 1-zu-1 umgesetzt, da die Keys durch Puppet kontrolliert werden. (purge_ssh_keys => true)
+# Req 17 Host-basierte Authentifizierung (via rhosts/shosts) darf nicht verwendet werden.
+# Req 18 Der Fingerprint des Hostkeys oder der Hostkey muss zur Verfuegung gestellt werden.
+#	Abweichung: Wird nicht auf den einzelnen Servern realisiert.
+############################
+PasswordAuthentication no
+RSAAuthentication yes
+ChallengeResponseAuthentication no
+PermitEmptyPasswords no
+PubKeyAuthentication yes
+PermitRootLogin without-password
+
+AuthorizedKeysFile .ssh/authorized_keys
+
+RhostsRSAAuthentication no
+HostbasedAuthentication no
+IgnoreRhosts yes
+
+############################
+# Req 16 Die vom SSH-Server zur Verfuegung gestellten Funktionen und Dienste eines Users muessen auf das erforderliche Minimum reduziert werden („Least Privilege“).
+# 	Dies ist standardmaessig nicht realisiert und muss projektindividuell geloest werden.
+############################
+
+############################
+# Req 21 Fuer SSH-Clients gilt, dass die Verwendung eines SSH-Authentifizierungsagenten.
+# 	Wird am Client geloest.
+############################
+<% if @virtual != "xen0" -%>AllowAgentForwarding no<% end -%>
+
+############################
+# Warning-Banner vor dem Login und Hinweis nach dem Login
+# Warning vor dem Login und Hinweis nach dem Login
+############################
+Banner /etc/issue
+PrintMotd yes
+
+# GSSAPI options
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials yes
+
+UsePAM yes
+
+# Accept locale-related environment variables
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+AcceptEnv XMODIFIERS
+
+# override default of no subsystems
+<%# SLES 11 and 12 are using a different location %>
+<% if @operatingsystem == "SLES" -%><% if @operatingsystemrelease == "12.0" -%>Subsystem       sftp    /usr/lib/ssh/sftp-server<%- else -%>Subsystem       sftp    /usr/lib64/ssh/sftp-server<%- end -%><% end -%>
+<%# now RedHat or CentOS %><% if @operatingsystem != "SLES" -%>Subsystem       sftp    /usr/libexec/openssh/sftp-server<% end -%>
+
+
+
+HostKey /etc/ssh/ssh_host_rsa_key
+KeyRegenerationInterval 1h
+ServerKeyBits 2048
+SyslogFacility AUTHPRIV
+
+LoginGraceTime 2m
+
+TCPKeepAlive yes
+Compression no
+ClientAliveInterval 120
+ClientAliveCountMax 3

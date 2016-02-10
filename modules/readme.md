@@ -1,0 +1,1 @@
+Ordner enthält im Unterordner Duplikate der Ordner manifests und templates des Repository-Roots.
