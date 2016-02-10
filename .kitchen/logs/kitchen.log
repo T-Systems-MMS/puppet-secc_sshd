@@ -1,0 +1,3 @@
+I, [2016-02-09T22:13:08.624851 #7520]  INFO -- Kitchen: -----> Starting Kitchen (v1.4.2)
+I, [2016-02-09T22:13:09.085443 #7520]  INFO -- Kitchen: -----> Destroying <rhel7-centos7-centos7>...
+I, [2016-02-09T22:13:32.004665 #7520]  INFO -- Kitchen: -----> Kitchen is finished. (0m23.38s)
