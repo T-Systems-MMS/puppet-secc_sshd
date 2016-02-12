@@ -17,7 +17,7 @@ class secc_sshd::config (
     $adminip = inline_template("<%= ${string} %>")
   }
   else {
-    $ifs = split($interfaces, ',')
+    $ifs = split($::interfaces, ',')
     $string = "@ipaddress_${ifs[$admininterface_nr]}"
     $adminip = inline_template("<%= ${string} %>")
   }
