@@ -46,7 +46,8 @@ Das Modul kontrolliert sowohl die /etc/ssh/sshd_config, /etc/ssh/ssh_config, /et
 - Modul wurde erfolgreich gegen CentOS6, RHEL6, RHEL7, SLES11 und SLES12 getestet.
 
 ##Development
-- Änderungen am Modul sollten auch im Serverspec Script secc_ssh_spec.rb nachgezogen werden.
+- Aenderungen am Modul sollten auch im Serverspec Script secc_ssh_spec.rb nachgezogen werden.
+- Fuer Tests müssen die Ordner templates und manifests in den Ordner modules/secc_sshd puppet kopiert werden.
 
 ##Release Notes/Contributors/Etc
 - Initialrelease.
