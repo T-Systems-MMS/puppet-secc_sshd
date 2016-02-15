@@ -8,6 +8,7 @@ provisioner:
   modules_path: puppet/modules
   hiera_data_path: puppet/hieradata
   require_chef_for_busser: false
+  # for tests proxy.mms-dresden.de have to be replaced with 192.168.221.110 in the file: C:\Ruby22\lib\ruby\gems\2.2.0\gems\test-kitchen-1.4.2\support\busser_install_command.sh
   http_proxy: http://proxy.mms-dresden.de:8080
   https_proxy: http://proxy.mms-dresden.de:8080
 
@@ -60,6 +61,7 @@ suites:
    excludes:
      - rhel7
      - centos7
+
 
 #verifier:
   #centos6 after gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 && curl -sSL https://get.rvm.io | bash -s stable && source /etc/profile.d/rvm.sh && rvm install 1.9.3 && ruby -v && source /etc/profile.d/rvm.sh && rvm 1.9.3 --default
