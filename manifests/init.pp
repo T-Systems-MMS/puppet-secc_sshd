@@ -9,7 +9,7 @@ class secc_sshd (
   $ext_sshd_KexAlgorithms = 'diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1',
   $ext_sshd_Ciphers = 'aes256-ctr',
   $ext_sshd_MACs = 'hmac-sha2-512,hmac-sha2-256',
-  $ext_servicename = 'Servicename'
+  $ext_servicename = 'change me - Servicename'
 ) {
 
   $admininterface_nr   = hiera(admininterface_nr, $ext_admininterface_nr)
