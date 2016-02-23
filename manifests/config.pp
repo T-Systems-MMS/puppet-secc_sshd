@@ -43,6 +43,10 @@ class secc_sshd::config (
     notify  => Class['secc_sshd::service'],
   }
 
+  file { '/etc/issue.net':
+    ensure  => absent,
+  }
+
   file { '/etc/motd':
     ensure  => present,
     owner   => 'root',
