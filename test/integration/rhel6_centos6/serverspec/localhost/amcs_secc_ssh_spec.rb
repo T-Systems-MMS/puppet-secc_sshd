@@ -86,6 +86,13 @@ describe file('/etc/ssh/sshd_config') do
   # Req 21
   its(:content) { should match /^AllowAgentForwarding no$/ }
   its(:content) { should_not match /^AllowAgentForwarding yes/ }
+  
+  # new adjustments
+  its(:content) { should_not match /^UseRoaming no$/ }
+  its(:content) { should_not match /^UseRoaming yes/ }
+  
+  its(:content) { should_not match /^HashKnownHosts yes$/ }
+  its(:content) { should_not match /^HashKnownHosts no/ }
 end
 
 # sshd config - check
