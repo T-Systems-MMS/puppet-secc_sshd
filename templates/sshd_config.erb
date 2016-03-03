@@ -107,6 +107,8 @@ IgnoreRhosts yes
 # Req 16 Die vom SSH-Server zur Verfuegung gestellten Funktionen und Dienste eines Users muessen auf das erforderliche Minimum reduziert werden („Least Privilege“).
 # 	Dies ist standardmaessig nicht realisiert und muss projektindividuell geloest werden.
 ############################
+StrictModes yes
+UsePrivilegeSeparation yes
 
 ############################
 # Req 21 Fuer SSH-Clients gilt, dass die Verwendung eines SSH-Authentifizierungsagenten.
@@ -137,8 +139,6 @@ AcceptEnv XMODIFIERS
 <%# SLES 11 and 12 are using a different location %>
 <% if @operatingsystem == "SLES" -%><% if @operatingsystemrelease == "12.0" -%>Subsystem       sftp    /usr/lib/ssh/sftp-server<%- else -%>Subsystem       sftp    /usr/lib64/ssh/sftp-server<%- end -%><% end -%>
 <%# now RedHat or CentOS %><% if @operatingsystem != "SLES" -%>Subsystem       sftp    /usr/libexec/openssh/sftp-server<% end -%>
-
-
 
 HostKey /etc/ssh/ssh_host_rsa_key
 KeyRegenerationInterval 1h

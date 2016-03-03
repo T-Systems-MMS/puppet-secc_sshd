@@ -57,7 +57,7 @@ suites:
  - name: rhel6_centos6
    sudo: false
    verifier:
-     ruby_bindir: '/usr/local/rvm/rubies/ruby-1.9.3-p551/bin/'
+     ruby_bindir: '/usr/local/rvm/rubies/ruby-2.2.4/bin/'
    excludes:
      - rhel7
      - centos7

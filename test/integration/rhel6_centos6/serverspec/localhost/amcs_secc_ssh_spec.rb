@@ -8,91 +8,71 @@ require 'spec_helper'
 ####
 
 # sshd config - check
-describe file('/etc/ssh/sshd_config') do
-  # Network
-  its(:content) { should match /^Port 22$/ }
-  its(:content) { should match /^AddressFamily inet$/ }
-  its(:content) { should match /^UseDNS no/ }
-  its(:content) { should_not match /^UseDNS yes/ }
+describe command('sshd -T') do
+	# Network
+	its(:stdout) { should match /^port 22$/ }
+	its(:stdout) { should match /^addressfamily inet$/ }
+	its(:stdout) { should match /^usedns no/ }
+	
+	# Banner
+	its(:stdout) { should match /^banner \/etc\/issue$/ }
+	its(:stdout) { should match /^printmotd yes$/ }
+	
+	# Req 1
+	its(:stdout) { should match /^protocol 2$/ }
+	
+	# Req 2
+	its(:stdout) { should match /^ciphers aes256-ctr$/ }
+	its(:stdout) { should match /^macs hmac-sha2-512,hmac-sha2-256$/ }
+	its(:stdout) { should match /^kexalgorithms diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1$/ }
+	
+	# Req 3
+	its(:stdout) { should match /^listenaddress 1/ }
+	
+	# Req 6
+	its(:stdout) { should match /^allowtcpforwarding no$/ }
+	
+	# Req 7
+	its(:stdout) { should match /^gatewayports no$/ }
+	
+	# Req 8
+	its(:stdout) { should match /^x11forwarding no$/ }
+	its(:stdout) { should match /^x11uselocalhost yes$/ }
+	its(:stdout) { should match /^gatewayports no$/ }
+	its(:stdout) { should match /^gatewayports no$/ }
+	
+	# Req 9 and Req 21
+	its(:stdout) { should match /^allowagentforwarding no$/ }
+	
+	# Req 10
+	its(:stdout) { should match /^permittunnel no$/ }
 
-  # Banner
-  its(:content) { should match /^Banner \/etc\/issue$/ }
-  its(:content) { should match /^PrintMotd yes$/ }
+	# Req 11
+	its(:stdout) { should match /^allowusers root/ }		
 
-  # Req 1
-  its(:content) { should match /^Protocol 2$/ }
-  its(:content) { should_not match /^Protocol 1/ }
-
-  # Req 2
-  its(:content) { should match /^Ciphers aes256-ctr$/ }
-  its(:content) { should match /^MACs hmac-sha2-512,hmac-sha2-256$/ }
-  its(:content) { should match /^KexAlgorithms diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1$/ }
-
-  # Req 3
-  its(:content) { should match /^ListenAddress 1/ }
-  its(:content) { should_not match /^ListenAddress 0.0.0.0/ }
-  its(:content) { should_not match /^ListenAddress ::/ }
-
-  # Req 6
-  its(:content) { should match /^AllowTcpForwarding no$/ }
-
-  # Req 7
-  its(:content) { should match /^GatewayPorts no$/ }
-
-  # Req 8
-  its(:content) { should match /^X11Forwarding no$/ }
-  its(:content) { should_not match /^X11Forwarding yes/ }
-  its(:content) { should match /^X11UseLocalhost yes$/ }
-  its(:content) { should_not match /^X11UseLocalhost no/ }
-
-  # Req 9 and Req 21
-  its(:content) { should match /^AllowAgentForwarding no$/ }
-  its(:content) { should_not match /^AllowAgentForwarding yes/ }
-
-  # Req 10
-  its(:content) { should match /^PermitTunnel no$/ }
-  its(:content) { should_not match /^PermitTunnel yes/ }
-
-  # Req 11
-  its(:content) { should match /^AllowUsers/ }
-  its(:content) { should match /AllowGroups/ }
-
-  # Req 12
-  its(:content) { should match /^SyslogFacility AUTHPRIV$/ }
-  its(:content) { should match /^LogLevel VERBOSE$/ }
-
-  # Req 13,14,15,17,18
-  its(:content) { should match /^PubKeyAuthentication yes$/ }
-  its(:content) { should_not match /^PubKeyAuthentication no/ }
-  its(:content) { should match /^PasswordAuthentication no$/ }
-  its(:content) { should_not match /^PasswordAuthentication yes/ }
-  its(:content) { should match /^RSAAuthentication yes$/ }
-  its(:content) { should_not match /^RSAAuthentication no/ }
-  its(:content) { should match /^ChallengeResponseAuthentication no$/ }
-  its(:content) { should_not match /^ChallengeResponseAuthentication yes/ }
-  its(:content) { should match /^PermitEmptyPasswords no$/ }
-  its(:content) { should_not match /^PermitEmptyPasswords yes/ }
-  its(:content) { should match /^PermitRootLogin without-password$/ }
-  its(:content) { should_not match /^PermitRootLogin yes/ }
-  its(:content) { should match /^AuthorizedKeysFile .ssh\/authorized_keys$/ }
-  its(:content) { should_not match /^AuthorizedKeysFile \// }
-  its(:content) { should match /^RhostsRSAAuthentication no$/ }
-  its(:content) { should_not match /^RhostsRSAAuthentication yes/ }
-  its(:content) { should match /^HostbasedAuthentication no$/ }
-  its(:content) { should_not match /^HostbasedAuthentication yes/ }
-  its(:content) { should match /^IgnoreRhosts yes$/ }
-  its(:content) { should_not match /^IgnoreRhosts no/ }
-
-  # Req 21
-  its(:content) { should match /^AllowAgentForwarding no$/ }
-  its(:content) { should_not match /^AllowAgentForwarding yes/ }
-  
-  # new adjustments
-  its(:content) { should_not match /^UseRoaming no$/ }
-  its(:content) { should_not match /^UseRoaming yes/ }
-  
-  its(:content) { should_not match /^HashKnownHosts yes$/ }
-  its(:content) { should_not match /^HashKnownHosts no/ }
+	# Req 12
+	its(:stdout) { should match /^syslogfacility AUTHPRIV$/ }	
+	its(:stdout) { should match /^loglevel VERBOSE$/ }
+	
+	# Req 13,14,15,17,18
+	its(:stdout) { should match /^pubkeyauthentication yes$/ }	
+	its(:stdout) { should match /^passwordauthentication no$/ }
+	its(:stdout) { should match /^rsaauthentication yes$/ }	
+	its(:stdout) { should match /^challengeresponseauthentication no$/ }
+	its(:stdout) { should match /^permitemptypasswords no$/ }	
+	its(:stdout) { should match /^permitrootlogin without-password$/ }
+	its(:stdout) { should match /^authorizedkeysfile .ssh\/authorized_keys$/ }	
+	its(:stdout) { should match /^rhostsrsaauthentication no$/ }
+	its(:stdout) { should match /^hostbasedauthentication no$/ }	
+	its(:stdout) { should match /^ignorerhosts yes$/ }
+	
+	# Req 21
+	its(:stdout) { should match /^allowagentforwarding no$/ }
+	
+	# additions for user feedback
+	its(:stdout) { should match /^strictmodes yes$/ }
+	its(:stdout) { should match /^useprivilegeseparation yes$/ }
+	
 end
 
 # sshd config - check

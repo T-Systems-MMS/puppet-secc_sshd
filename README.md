@@ -54,3 +54,5 @@ Das Modul kontrolliert sowohl die /etc/ssh/sshd_config, /etc/ssh/ssh_config, /et
 - 1.0.3: Roaming Feature aufgrund CVE-2016-0777 und CVE-2016-0778 deaktiviert.
 - 1.1.0: Added Parameters (Admininterface - default first; AllowUsers, AllowGroups, DenyUser, DenyGroups, KexAlgorithm, Ciphers and MACs for more flexibility.
  - Adjusted KexAlgorithms from 'diffie-hellman-group-exchange-sha256' to 'diffie-hellman-group-exchange-sha256, diffie-hellman-group14-sha1' because SCB needs the latter.
+- 1.1.1: Added ExplicitParameters for StrictMode and PrivilegeSeperation
+ - Adjusted Ruby Version for Kitchen
