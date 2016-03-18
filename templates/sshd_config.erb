@@ -33,7 +33,7 @@ Ciphers <%= @sshd_Ciphers %>
 # 	Getestet fuer XenServer und virtuelle Server. Physische Systeme muessten auch funktionieren. VMWare-Hosts muss geprueft werden.
 ############################
 <% if @adminip -%>
-# ListenAddress <%= @adminip %>
+ListenAddress <%= @adminip %>
 <% else -%>
 # Replace HERE
 # ListenAddress @@ADMINIP@@
