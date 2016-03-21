@@ -1,4 +1,4 @@
-# AMCS SecC - OpenSSH Module - Version 1.1.1
+# AMCS SecC - OpenSSH Module - Version 1.1.2
 
 ####Table of Contents
 
@@ -56,3 +56,4 @@ Das Modul kontrolliert sowohl die /etc/ssh/sshd_config, /etc/ssh/ssh_config, /et
  - Adjusted KexAlgorithms from 'diffie-hellman-group-exchange-sha256' to 'diffie-hellman-group-exchange-sha256, diffie-hellman-group14-sha1' because SCB needs the latter.
 - 1.1.1: Added ExplicitParameters for StrictMode and PrivilegeSeperation
  - Adjusted Ruby Version for Kitchen
+- 1.1.2: Aufnahme eines Parameters für die OS-Bereitstellung, da beim Bootstrapping eine temporäre IP vergeben wird, welche dann nach Instanzieren zu einer VM für eine nicht erreichbare Instanz sorgt. 
