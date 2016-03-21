@@ -27,11 +27,18 @@ Ciphers <%= @sshd_Ciphers %>
 <% if @virtual == "xen0" -%>MACs hmac-sha1<% end %>
 <% if @virtual != "xen0" -%>KexAlgorithms <%= @sshd_KexAlgorithms %><% end %>
 
+<% if @setListenAddress -%>
 ############################
 # Req 3 Der SSH-Serverdienst muss ausschliesslich an die Schnittstellen und/oder IP-Adressen gebunden werden, auf denen dieser Dienst erforderlich ist.
 # 	Getestet fuer XenServer und virtuelle Server. Physische Systeme muessten auch funktionieren. VMWare-Hosts muss geprueft werden.
 ############################
+<% if @adminip -%>
 ListenAddress <%= @adminip %>
+<% else -%>
+# Replace HERE
+# ListenAddress @@ADMINIP@@
+<% end -%>
+<% end -%>
 
 ############################
 # Req 4 Der SSH-Serverdienst muss als Stand-Alone Daemon ausgefuehrt werden.

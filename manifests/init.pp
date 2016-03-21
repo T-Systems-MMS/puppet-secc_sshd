@@ -2,6 +2,7 @@
 class secc_sshd (
   $ext_admininterface_nr = '0',
   $ext_admininterface_xen0 = 'xenbr0',
+  $ext_setListenAddress = true,
   $ext_sshd_AllowUsers = 'root rootuser',
   $ext_sshd_AllowGroups = '',
   $ext_sshd_DenyUsers = '',
@@ -14,6 +15,7 @@ class secc_sshd (
 
   $admininterface_nr   = hiera(admininterface_nr, $ext_admininterface_nr)
   $admininterface_xen0 = hiera(admininterface_xen0, $ext_admininterface_xen0)
+  $setListenAddress    = hiera(setListenAddress, $ext_setListenAddress)
   $sshd_AllowUsers     = hiera(sshd_AllowUsers, $ext_sshd_AllowUsers)
   $sshd_AllowGroups    = hiera(sshd_AllowGroups, $ext_sshd_AllowGroups)
   $sshd_DenyUsers      = hiera(sshd_DenyUsers, $ext_sshd_DenyUsers)
@@ -28,6 +30,7 @@ class secc_sshd (
   class { 'secc_sshd::config':
     admininterface_nr   => $admininterface_nr,
     admininterface_xen0 => $admininterface_xen0,
+    setListenAddress    => $setListenAddress,
     sshd_AllowUsers     => $sshd_AllowUsers,
     sshd_AllowGroups    => $sshd_AllowGroups,
     sshd_DenyUsers      => $sshd_DenyUsers,

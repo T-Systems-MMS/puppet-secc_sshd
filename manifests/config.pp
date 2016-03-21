@@ -2,6 +2,7 @@
 class secc_sshd::config (
   $admininterface_nr,
   $admininterface_xen0,
+  $setListenAddress,
   $sshd_AllowUsers,
   $sshd_AllowGroups,
   $sshd_DenyUsers,
@@ -12,14 +13,16 @@ class secc_sshd::config (
   $servicename
 ) {
 
-  if ( $::virtual == 'xen0' ) {
-    $string = "@ipaddress_${admininterface_xen0}"
-    $adminip = inline_template("<%= ${string} %>")
-  }
-  else {
-    $ifs = split($::interfaces, ',')
-    $string = "@ipaddress_${ifs[$admininterface_nr]}"
-    $adminip = inline_template("<%= ${string} %>")
+  if ( $setListenAddress ) {
+    if ( $::virtual == 'xen0' ) {
+      $string = "@ipaddress_${admininterface_xen0}"
+      $adminip = inline_template("<%= ${string} %>")
+    }
+    else {
+      $ifs = split($::interfaces, ',')
+      $string = "@ipaddress_${ifs[$admininterface_nr]}"
+      $adminip = inline_template("<%= ${string} %>")
+    }
   }
 
   file { '/etc/ssh/sshd_config':
