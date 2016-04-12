@@ -47,7 +47,7 @@ ListenAddress <%= @adminip %>
 ############################
 
 ############################
-# Req 6 TCP/IP-Port-Weiterleitungen („Port Forwarding“) muessen kontrolliert eingesetzt werden.
+# Req 6 TCP/IP-Port-Weiterleitungen ("Port Forwarding") muessen kontrolliert eingesetzt werden.
 ############################
 AllowTcpForwarding no
 
@@ -57,7 +57,7 @@ AllowTcpForwarding no
 GatewayPorts no
 
 ############################
-# Req 8 X11-Weiterleitungen muessen kontrolliert eingesetzt werden („X11-Forwarding“).
+# Req 8 X11-Weiterleitungen muessen kontrolliert eingesetzt werden ("X11-Forwarding").
 ############################
 X11Forwarding no
 X11UseLocalhost yes
@@ -68,7 +68,7 @@ X11UseLocalhost yes
 <% if @virtual != "xen0" -%>AllowAgentForwarding no<% end -%>
 
 ############################
-# Req 10 Tunnel Devices duerfen nicht benutzt werden („tunnel device forwarding“).
+# Req 10 Tunnel Devices duerfen nicht benutzt werden ("tunnel device forwarding").
 ############################
 PermitTunnel no
 
@@ -111,7 +111,7 @@ HostbasedAuthentication no
 IgnoreRhosts yes
 
 ############################
-# Req 16 Die vom SSH-Server zur Verfuegung gestellten Funktionen und Dienste eines Users muessen auf das erforderliche Minimum reduziert werden („Least Privilege“).
+# Req 16 Die vom SSH-Server zur Verfuegung gestellten Funktionen und Dienste eines Users muessen auf das erforderliche Minimum reduziert werden ("Least Privilege").
 # 	Dies ist standardmaessig nicht realisiert und muss projektindividuell geloest werden.
 ############################
 StrictModes yes
