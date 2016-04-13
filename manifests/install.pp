@@ -2,7 +2,7 @@
 class secc_sshd::install {
 
   package { 'openssh':
-    ensure => installed,
+    ensure => latest,
   }
 
 }
