@@ -75,10 +75,18 @@ PermitTunnel no
 ############################
 # Req 11 Die Nutzung des SSH-Dienstes muss auf Gruppen (bzw. Benutzer) beschraenkt werden.
 ############################
+<% if @sshd_AllowUsers and @sshd_AllowUsers != "" -%>
 AllowUsers <%= @sshd_AllowUsers %>
+<% end -%>
+<% if @sshd_AllowGroups and @sshd_AllowGroups != "" -%>
 AllowGroups <%= @sshd_AllowGroups %>
+<% end -%>
+<% if @sshd_DenyUsers and @sshd_DenyUsers != "" -%>
 DenyUsers <%= @sshd_DenyUsers %>
+<% end -%>
+<% if @sshd_DenyGroups and @sshd_DenyGroups != "" -%>
 DenyGroups <%= @sshd_DenyGroups %>
+<% end -%>
 
 ############################
 # Req 12 SSH-Logins muessen aufgezeichnet werden.
