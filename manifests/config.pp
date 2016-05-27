@@ -10,6 +10,7 @@ class secc_sshd::config (
   $sshd_KexAlgorithms,
   $sshd_Ciphers,
   $sshd_MACs,
+  $sshd_AuthorizedKeysFile,
   $servicename
 ) {
 

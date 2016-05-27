@@ -100,7 +100,8 @@ LogLevel VERBOSE
 # 	Public Key Authentication ist bis dahin empfohlen
 # Req 14 Eine Passwort-Authentifizierung (Passwortabfrage) darf nicht durch den SSH-Dienst angeboten werden.
 # Req 15 Die Authentifizierungsinformationen der SSH-Benutzer (oeffentliche SSH-Schluessel im Authorized-KeysFile) muessen kontrolliert und geschuetzt werden.
-#	Abweichung: Wird nicht 1-zu-1 umgesetzt, da die Keys durch Puppet kontrolliert werden. (purge_ssh_keys => true)
+#	 Abweichung: Wird nicht per default umgesetzt um bestehende Services nicht negativ zu beeinflussen, ist jedoch für höhere Compliance konfigurierbar.
+#        Achtung: Im Modul zur Konfiguration der User und deren Keys, die hier konfigurierte Location ebenfalls anwenden.
 # Req 17 Host-basierte Authentifizierung (via rhosts/shosts) darf nicht verwendet werden.
 # Req 18 Der Fingerprint des Hostkeys oder der Hostkey muss zur Verfuegung gestellt werden.
 #	Abweichung: Wird nicht auf den einzelnen Servern realisiert.
@@ -112,7 +113,7 @@ PermitEmptyPasswords no
 PubKeyAuthentication yes
 PermitRootLogin without-password
 
-AuthorizedKeysFile .ssh/authorized_keys
+AuthorizedKeysFile <%= @sshd_AuthorizedKeysFile %>
 
 RhostsRSAAuthentication no
 HostbasedAuthentication no

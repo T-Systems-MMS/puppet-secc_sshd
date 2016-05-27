@@ -1,4 +1,4 @@
-# AMCS SecC - OpenSSH Module - Version 1.1.2
+# AMCS SecC - OpenSSH Module - Version 1.1.10
 
 ####Table of Contents
 
@@ -23,7 +23,7 @@ Das Modul kontrolliert sowohl die /etc/ssh/sshd_config, /etc/ssh/ssh_config, /et
 ###sshd_config
 - SoC Requirements 1 - 12 werden ohne Einschränkungen erfüllt.
 - SoC Requirements 13, 14, 17, 18 werden über Public Key Authentication erfüllt.
-- SoC Requirement 15 wird nicht direkt umgesetzt, sondern durch Puppet kontrolliert. (Module Users)
+- SoC Requirement 15 wird per Default nicht erfüllt um bestehende Services im Betrieb nicht zu beeinflussen, ermöglicht aber durch Konfiguration die Compliance -> beim Modul zum Management der User muss hier jedoch die Location ebenfalls beachtet werden!
 - SoC Requirement 16 muss projektindividuell gelöst werden.
 - SOC Requirement 18 wird nicht zentral realisiert, aber ist eine sinnvolle Anforderung für die Serviceshell als Jumpserver.
 - SoC Requirement 21 (der serverseitige Teil) wird ohne Einschränkung realisiert.
@@ -56,4 +56,5 @@ Das Modul kontrolliert sowohl die /etc/ssh/sshd_config, /etc/ssh/ssh_config, /et
  - Adjusted KexAlgorithms from 'diffie-hellman-group-exchange-sha256' to 'diffie-hellman-group-exchange-sha256, diffie-hellman-group14-sha1' because SCB needs the latter.
 - 1.1.1: Added ExplicitParameters for StrictMode and PrivilegeSeperation
  - Adjusted Ruby Version for Kitchen
-- 1.1.2: Aufnahme eines Parameters für die OS-Bereitstellung, da beim Bootstrapping eine temporäre IP vergeben wird, welche dann nach Instanzieren zu einer VM für eine nicht erreichbare Instanz sorgt. 
+- 1.1.2: Aufnahme eines Parameters für die OS-Bereitstellung, da beim Bootstrapping eine temporäre IP vergeben wird, welche dann nach Instanzieren zu einer VM für eine nicht erreichbare Instanz sorgt.
+- 1.1.10: Konfigurierbarkeit von Requirement 15 um höhere Compliance zu ermöglichen.
