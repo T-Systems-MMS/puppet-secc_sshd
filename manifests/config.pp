@@ -60,3 +60,4 @@ class secc_sshd::config (
   }
 
 }
+
