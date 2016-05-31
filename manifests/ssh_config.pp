@@ -1,5 +1,9 @@
 # config
-class secc_sshd::ssh_config {
+class secc_sshd::ssh_config (
+  $ssh_KexAlgorithms,
+  $ssh_Ciphers,
+  $ssh_MACs
+) {
 
   file { '/etc/ssh/ssh_config':
     ensure  => present,

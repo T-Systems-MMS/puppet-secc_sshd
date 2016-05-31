@@ -11,6 +11,9 @@ class secc_sshd (
   $ext_sshd_Ciphers = 'aes256-ctr',
   $ext_sshd_MACs = 'hmac-sha2-512,hmac-sha2-256',
   $ext_sshd_AuthorizedKeysFile = '.ssh/authorized_keys',
+  $ext_ssh_KexAlgorithms = 'diffie-hellman-group-exchange-sha256',
+  $ext_ssh_Ciphers = 'aes256-ctr',
+  $ext_ssh_MACs = 'hmac-sha2-512,hmac-sha2-256',
   $ext_servicename = 'change me - Servicename'
 ) {
 
@@ -25,6 +28,9 @@ class secc_sshd (
   $sshd_Ciphers            = hiera(sshd_Ciphers, $ext_sshd_Ciphers)
   $sshd_MACs           	   = hiera(sshd_MACs, $ext_sshd_MACs)
   $sshd_AuthorizedKeysFile = hiera(sshd_AuthorizedKeysFile, $ext_sshd_AuthorizedKeysFile)
+  $ssh_KexAlgorithms       = hiera(ssh_KexAlgorithm, $ext_ssh_KexAlgorithms)
+  $ssh_Ciphers             = hiera(ssh_Ciphers, $ext_ssh_Ciphers)
+  $ssh_MACs                = hiera(ssh_MACs, $ext_ssh_MACs)
   $servicename             = hiera(servicename, $ext_servicename)
 
   include secc_sshd::install
@@ -48,6 +54,10 @@ class secc_sshd (
 
   include secc_sshd::service
 
-  include secc_sshd::ssh_config
+  class { 'secc_sshd::ssh_config':
+    ssh_KexAlgorithms => $ssh_KexAlgorithms,
+    ssh_Ciphers       => $ssh_Ciphers,
+    ssh_MACs          => $ssh_MACs,
+  }
 
 }

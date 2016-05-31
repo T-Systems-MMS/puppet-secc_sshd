@@ -42,9 +42,9 @@ GatewayPorts no
 ############################
 # Ciphers and Algorithms
 ############################
-Ciphers aes256-ctr
-MACs hmac-sha2-512,hmac-sha2-256
-KexAlgorithms diffie-hellman-group-exchange-sha256
+Ciphers <%= @ssh_Ciphers %>
+MACs <%= @ssh_MACs %>
+KexAlgorithms <%= @ssh_KexAlgorithms %>
 
 ############################
 # CVE-2016-0777 & CVE-2016-0778
