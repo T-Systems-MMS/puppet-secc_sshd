@@ -3,7 +3,7 @@
 ####Table of Contents
 
 1. [Overview](#overview)
-2. [Fragen und Anmerkungen]
+2. [Fragen und Anmerkungen](#fragen)
 3. [Module Description - What the module does and why it is useful](#module-description)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
