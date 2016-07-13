@@ -10,7 +10,7 @@ end
 # version check
 describe command('ssh -V') do
   #req 5
-  its(:stderr) { should match /OpenSSH\_6.*/ }
+  its(:stderr) { should match /OpenSSH\_5.*/ }
 end
 
 # sshd config - check
