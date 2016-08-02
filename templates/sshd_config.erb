@@ -49,7 +49,8 @@ ListenAddress <%= @adminip %>
 ############################
 # Req 6 TCP/IP-Port-Weiterleitungen ("Port Forwarding") muessen kontrolliert eingesetzt werden.
 ############################
-AllowTcpForwarding no
+<% if @virtual != "xen0" -%><% if @osfamily == 'RedHat' and @operatingsystemmajrelease == '5' -%><% else -%>AllowTcpForwarding <%= @sshd_AllowTcpForwarding %><% end -%><% end -%>
+
 
 ############################
 # Req 7 Gateway-Ports duerfen nicht aktiviert werden.
@@ -65,7 +66,8 @@ X11UseLocalhost yes
 ############################
 # Req 9 SSH-"Agent Forwarding" muss serverseitig deaktiviert werden.
 ############################
-<% if @virtual != "xen0" -%>AllowAgentForwarding no<% end -%>
+<% if @virtual != "xen0" -%><% if @osfamily == 'RedHat' and @operatingsystemmajrelease == '5' -%><% else -%>AllowAgentForwarding <%= @sshd_AllowAgentForwarding %><% end -%><% end -%>
+
 
 ############################
 # Req 10 Tunnel Devices duerfen nicht benutzt werden ("tunnel device forwarding").
@@ -130,7 +132,8 @@ UsePrivilegeSeparation yes
 # Req 21 Fuer SSH-Clients gilt, dass die Verwendung eines SSH-Authentifizierungsagenten.
 # 	Wird am Client geloest.
 ############################
-<% if @virtual != "xen0" -%>AllowAgentForwarding no<% end -%>
+<% if @virtual != "xen0" -%><% if @osfamily == 'RedHat' and @operatingsystemmajrelease == '5' -%><% else -%>AllowAgentForwarding <%= @sshd_AllowAgentForwarding %><% end -%><% end -%>
+
 
 ############################
 # Warning-Banner vor dem Login und Hinweis nach dem Login

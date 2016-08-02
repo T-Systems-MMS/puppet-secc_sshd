@@ -36,7 +36,12 @@ describe command('sshd -T') do
 	its(:stdout) { should match /^listenaddress 1/ }
 
 	# Req 6
-	its(:stdout) { should match /^allowtcpforwarding no$/ }
+	if ( os[:family] == 'redhat' && os[:release] >= '6' )
+	  its(:stdout) { should match /^allowtcpforwarding no$/ }
+	end
+    if ( os[:family] == 'redhat' && os[:release] == '5' )
+	  its(:stdout) { should_not match /^allowtcpforwarding no$/ }
+	end
 
 	# Req 7
 	its(:stdout) { should match /^gatewayports no$/ }
@@ -48,7 +53,12 @@ describe command('sshd -T') do
 	its(:stdout) { should match /^gatewayports no$/ }
 
 	# Req 9 and Req 21
-	its(:stdout) { should match /^allowagentforwarding no$/ }
+	if ( os[:family] == 'redhat' && os[:release] >= '6' )
+	  its(:stdout) { should match /^allowagentforwarding no$/ }
+	end
+	if ( os[:family] == 'redhat' && os[:release] == '5' )
+	  its(:stdout) { should_not match /^allowagentforwarding no$/ }
+	end
 
 	# Req 10
 	its(:stdout) { should match /^permittunnel no$/ }

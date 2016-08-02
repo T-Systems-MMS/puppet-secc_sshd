@@ -8,6 +8,8 @@ class secc_sshd::config (
   $sshd_DenyUsers,
   $sshd_DenyGroups,
   $sshd_KexAlgorithms,
+  $sshd_AllowTcpForwarding,
+  $sshd_AllowAgentForwarding,
   $sshd_Ciphers,
   $sshd_MACs,
   $sshd_AuthorizedKeysFile,
