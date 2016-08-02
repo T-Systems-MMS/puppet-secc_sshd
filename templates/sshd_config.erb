@@ -25,7 +25,7 @@ Protocol 2
 Ciphers <%= @sshd_Ciphers %>
 <% if @virtual != "xen0" -%>MACs <%= @sshd_MACs %><% end %>
 <% if @virtual == "xen0" -%>MACs hmac-sha1<% end %>
-<% if @virtual != "xen0" -%>KexAlgorithms <%= @sshd_KexAlgorithms %><% end %>
+<% if @virtual != "xen0" -%><% if @osfamily == 'RedHat' and @operatingsystemmajrelease == '5' -%><% else -%>KexAlgorithms <%= @sshd_KexAlgorithms %><% end %><% end %>
 
 <% if @setListenAddress -%>
 ############################
@@ -65,6 +65,8 @@ X11UseLocalhost yes
 
 ############################
 # Req 9 SSH-"Agent Forwarding" muss serverseitig deaktiviert werden.
+# Req 21 Fuer SSH-Clients gilt, dass die Verwendung eines SSH-Authentifizierungsagenten.
+# 	Wird am Client geloest.
 ############################
 <% if @virtual != "xen0" -%><% if @osfamily == 'RedHat' and @operatingsystemmajrelease == '5' -%><% else -%>AllowAgentForwarding <%= @sshd_AllowAgentForwarding %><% end -%><% end -%>
 
@@ -127,13 +129,6 @@ IgnoreRhosts yes
 ############################
 StrictModes yes
 UsePrivilegeSeparation yes
-
-############################
-# Req 21 Fuer SSH-Clients gilt, dass die Verwendung eines SSH-Authentifizierungsagenten.
-# 	Wird am Client geloest.
-############################
-<% if @virtual != "xen0" -%><% if @osfamily == 'RedHat' and @operatingsystemmajrelease == '5' -%><% else -%>AllowAgentForwarding <%= @sshd_AllowAgentForwarding %><% end -%><% end -%>
-
 
 ############################
 # Warning-Banner vor dem Login und Hinweis nach dem Login

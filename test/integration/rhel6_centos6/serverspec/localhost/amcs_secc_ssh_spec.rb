@@ -30,7 +30,12 @@ describe command('sshd -T') do
 	# Req 2
 	its(:stdout) { should match /^ciphers aes256-ctr$/ }
 	its(:stdout) { should match /^macs hmac-sha2-512,hmac-sha2-256$/ }
-	its(:stdout) { should match /^kexalgorithms diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1$/ }
+	if ( os[:family] == 'redhat' && os[:release] >= '6' )
+	  its(:stdout) { should match /^kexalgorithms diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1$/ }
+	end
+    if ( os[:family] == 'redhat' && os[:release] == '5' )
+      its(:stdout) { should_not match /^kexalgorithms diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1$/ }
+    end
 
 	# Req 3
 	its(:stdout) { should match /^listenaddress 1/ }
