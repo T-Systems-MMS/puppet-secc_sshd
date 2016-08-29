@@ -2,3 +2,4 @@
 .kitchen/
 *.log
 modules/
+/.idea/
