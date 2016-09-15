@@ -104,7 +104,7 @@ LogLevel VERBOSE
 # 	Public Key Authentication ist bis dahin empfohlen
 # Req 14 Eine Passwort-Authentifizierung (Passwortabfrage) darf nicht durch den SSH-Dienst angeboten werden.
 # Req 15 Die Authentifizierungsinformationen der SSH-Benutzer (oeffentliche SSH-Schluessel im Authorized-KeysFile) muessen kontrolliert und geschuetzt werden.
-#	 Abweichung: Wird nicht per default umgesetzt um bestehende Services nicht negativ zu beeinflussen, ist jedoch für höhere Compliance konfigurierbar.
+#	 Abweichung: Wird nicht per default umgesetzt um bestehende Services nicht negativ zu beeinflussen, ist jedoch für hoehere Compliance konfigurierbar.
 #        Achtung: Im Modul zur Konfiguration der User und deren Keys, die hier konfigurierte Location ebenfalls anwenden.
 # Req 17 Host-basierte Authentifizierung (via rhosts/shosts) darf nicht verwendet werden.
 # Req 18 Der Fingerprint des Hostkeys oder der Hostkey muss zur Verfuegung gestellt werden.
@@ -124,7 +124,7 @@ HostbasedAuthentication no
 IgnoreRhosts yes
 
 ############################
-# Req 16 Die vom SSH-Server zur Verfuegung gestellten Funktionen und Dienste eines Users muessen auf das erforderliche Minimum reduziert werden ("Least Privilege").
+# Req 16 Die vom SSH-Server zur Verfuegung gestellten Funktionen und Dienste eines Users muessen auf das erforderliche Minimum reduziert werden ('Least Privilege').
 # 	Dies ist standardmaessig nicht realisiert und muss projektindividuell geloest werden.
 ############################
 StrictModes yes
