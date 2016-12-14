@@ -2,6 +2,7 @@
 class secc_sshd::config (
   $admininterface_nr,
   $admininterface_xen0,
+  $issue_banner,
   $setListenAddress,
   $sshd_AllowUsers,
   $sshd_AllowGroups,
@@ -38,15 +39,21 @@ class secc_sshd::config (
     notify  => Class['secc_sshd::service'],
   }
 
-  file { '/etc/issue':
-    ensure  => present,
-    mode    => '0644',
-    replace => true,
-    owner   => 'root',
-    group   => 'root',
-    content => template('secc_sshd/issue_banner.erb'),
-    require => Class['secc_sshd::install'],
-    notify  => Class['secc_sshd::service'],
+  if $issue_banner {
+    file { '/etc/issue':
+      ensure  => present,
+      mode    => '0644',
+      replace => true,
+      owner   => 'root',
+      group   => 'root',
+      content => template('secc_sshd/issue_banner.erb'),
+      require => Class['secc_sshd::install'],
+      notify  => Class['secc_sshd::service'],
+    }
+  else {
+    file { '/etc/issue':
+      ensure  => absent,
+    }
   }
 
   file { '/etc/issue.net':
