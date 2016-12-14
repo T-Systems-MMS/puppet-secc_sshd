@@ -50,7 +50,7 @@ class secc_sshd::config (
       require => Class['secc_sshd::install'],
       notify  => Class['secc_sshd::service'],
     }
-  else {
+  } else {
     file { '/etc/issue':
       ensure  => absent,
     }
