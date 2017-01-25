@@ -6,7 +6,7 @@ class secc_sshd::service {
     hasrestart => true,
     hasstatus  => true,
     enable     => true,
-    require    => Class['secc_sshd::install'],
+    subscribe  => Class['secc_sshd::install'],
   }
 
 }
