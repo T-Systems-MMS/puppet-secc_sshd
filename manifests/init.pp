@@ -1,5 +1,6 @@
 # SecC Linux SSH Hardening
 class secc_sshd (
+  $ext_admin_interface           = ['eth0'],
   $ext_admininterface_nr         = '0',
   $ext_admininterface_xen0       = 'xenbr0',
   $ext_setListenAddress          = true,
@@ -19,7 +20,17 @@ class secc_sshd (
   $ext_servicename               = 'change me - Servicename',
   $ext_issue_banner              = true,
 ) {
+  
+  
+  if ($ext_admininterface_nr) {
+    fail('using variable ext_admininterface_nr is deprecated, cancel puppet run | please use ext_admin_interface')
+  }
+  
+  if ($ext_admininterface_xen0) {
+    fail('using variable ext_admininterface_xen0 is deprecated, cancel puppet run | please use ext_admin_interface')
+  }
 
+  $admin_interface           = hiera(admin_interface, $ext_admin_interface)
   $admininterface_nr         = hiera(admininterface_nr, $ext_admininterface_nr)
   $admininterface_xen0       = hiera(admininterface_xen0, $ext_admininterface_xen0)
   $setListenAddress          = hiera(setListenAddress, $ext_setListenAddress)
@@ -41,6 +52,7 @@ class secc_sshd (
   include secc_sshd::install
 
   class { 'secc_sshd::config':
+    admin_interface           => $admin_interface,
     admininterface_nr         => $admininterface_nr,
     admininterface_xen0       => $admininterface_xen0,
     setListenAddress          => $setListenAddress,

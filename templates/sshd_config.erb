@@ -28,12 +28,25 @@ Ciphers <%= @sshd_Ciphers %>
 <% if @virtual != "xen0" -%><% if @osfamily == 'RedHat' and @operatingsystemmajrelease == '5' -%><% else -%>KexAlgorithms <%= @sshd_KexAlgorithms %><% end %><% end %>
 
 <% if @setListenAddress -%>
+<% if @adminip -%>
+<%= @adminip -%>
+<% end %>
+<% if @admin_interface -%>
+<% arr = Array.new %>
+<% @admin_interface.each do |ifname| -%>
+<% arr.push("ipaddress_#{ifname}") %>
+<% end -%>
 ############################
 # Req 3 Der SSH-Serverdienst muss ausschliesslich an die Schnittstellen und/oder IP-Adressen gebunden werden, auf denen dieser Dienst erforderlich ist.
 # 	Getestet fuer XenServer und virtuelle Server. Physische Systeme muessten auch funktionieren. VMWare-Hosts muss geprueft werden.
 ############################
-<% if @adminip -%>
-ListenAddress <%= @adminip %>
+<% arr.each do |ifs| -%>
+<% if scope.lookupvar(ifs) == nil  %>
+<% raise 'The Interface you defined does not exist.' %>
+<% else -%>
+ListenAddress <%= scope.lookupvar(ifs) %>
+<% end -%>
+<% end -%>
 <% else -%>
 # Replace HERE
 # ListenAddress @@ADMINIP@@

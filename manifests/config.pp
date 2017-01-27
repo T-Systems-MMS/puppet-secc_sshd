@@ -1,5 +1,6 @@
 # config
 class secc_sshd::config (
+  $admin_interface,
   $admininterface_nr,
   $admininterface_xen0,
   $issue_banner,
@@ -17,17 +18,14 @@ class secc_sshd::config (
   $servicename
 ) {
 
-  if ( $setListenAddress ) {
-    if ( $::virtual == 'xen0' ) {
-      $string = "@ipaddress_${admininterface_xen0}"
+  if ($setListenAddress) {
+    
+    if ($::virtual == 'xen0') {
+      $string = "@ipaddress_${admin_interface[0]}"
       $adminip = inline_template("<%= ${string} %>")
     }
-    else {
-      $ifs = split($::interfaces, ',')
-      $string = "@ipaddress_${ifs[$admininterface_nr]}"
-      $adminip = inline_template("<%= ${string} %>")
-    }
-  }
+    
+  } 
 
   file { '/etc/ssh/sshd_config':
     ensure  => present,
