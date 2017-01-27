@@ -50,14 +50,3 @@ Das Modul kontrolliert sowohl die /etc/ssh/sshd_config, /etc/ssh/ssh_config, /et
 
 ##Development
 - Aenderungen am Modul sollten auch im Serverspec Script secc_ssh_spec.rb nachgezogen werden.
-
-##Release Notes/Contributors/Etc
-- Initialrelease.
-- Vielen Dank an Markus Kaloski für die Übermittlung seiner gehärteten Version.
-- 1.0.3: Roaming Feature aufgrund CVE-2016-0777 und CVE-2016-0778 deaktiviert.
-- 1.1.0: Added Parameters (Admininterface - default first; AllowUsers, AllowGroups, DenyUser, DenyGroups, KexAlgorithm, Ciphers and MACs for more flexibility.
- - Adjusted KexAlgorithms from 'diffie-hellman-group-exchange-sha256' to 'diffie-hellman-group-exchange-sha256, diffie-hellman-group14-sha1' because SCB needs the latter.
-- 1.1.1: Added ExplicitParameters for StrictMode and PrivilegeSeperation
- - Adjusted Ruby Version for Kitchen
-- 1.1.2: Aufnahme eines Parameters für die OS-Bereitstellung, da beim Bootstrapping eine temporäre IP vergeben wird, welche dann nach Instanzieren zu einer VM für eine nicht erreichbare Instanz sorgt.
-- 1.1.10: Konfigurierbarkeit von Requirement 15 um höhere Compliance zu ermöglichen.
