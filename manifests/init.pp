@@ -1,8 +1,8 @@
 # SecC Linux SSH Hardening
 class secc_sshd (
   $ext_admin_interface           = ['eth0'],
-  $ext_admininterface_nr         = '0',
-  $ext_admininterface_xen0       = 'xenbr0',
+  $ext_admininterface_nr         = undef,
+  $ext_admininterface_xen0       = undef,
   $ext_setListenAddress          = true,
   $ext_sshd_AllowUsers           = 'root rootuser',
   $ext_sshd_AllowGroups          = '',
@@ -20,7 +20,6 @@ class secc_sshd (
   $ext_servicename               = 'change me - Servicename',
   $ext_issue_banner              = true,
 ) {
-  
   
   if ($ext_admininterface_nr) {
     fail('using variable ext_admininterface_nr is deprecated, cancel puppet run | please use ext_admin_interface')
