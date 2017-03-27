@@ -1,9 +1,7 @@
 # SecC Linux SSH Hardening
 class secc_sshd (
+  $ext_listen                    = undef,
   $ext_admin_interface           = ['eth0'],
-  $ext_admininterface_nr         = undef,
-  $ext_admininterface_xen0       = undef,
-  $ext_setListenAddress          = true,
   $ext_sshd_AllowUsers           = 'root rootuser',
   $ext_sshd_AllowGroups          = '',
   $ext_sshd_DenyUsers            = '',
@@ -20,19 +18,20 @@ class secc_sshd (
   $ext_servicename               = 'change me - Servicename',
   $ext_issue_banner              = true,
 ) {
-  
-  if ($ext_admininterface_nr) {
-    fail('using variable ext_admininterface_nr is deprecated, cancel puppet run | please use ext_admin_interface')
-  }
-  
-  if ($ext_admininterface_xen0) {
-    fail('using variable ext_admininterface_xen0 is deprecated, cancel puppet run | please use ext_admin_interface')
+
+  if ($ext_admin_interface) {
+    fail('using variable ext_admin_interface is deprecated, cancel puppet run | please use ext_listen and specify an IP there (e.g. 172.29.0.10)')
   }
 
-  $admin_interface           = hiera(admin_interface, $ext_admin_interface)
-  $admininterface_nr         = hiera(admininterface_nr, $ext_admininterface_nr)
-  $admininterface_xen0       = hiera(admininterface_xen0, $ext_admininterface_xen0)
-  $setListenAddress          = hiera(setListenAddress, $ext_setListenAddress)
+  if ($ext_admininterface_nr) {
+    fail('using variable ext_admininterface_nr is deprecated, cancel puppet run | please use ext_listen and specify an IP there (e.g. 172.29.0.10)')
+  }
+
+  if ($ext_admininterface_xen0) {
+    fail('using variable ext_admininterface_xen0 is deprecated, cancel puppet run | please use ext_listen and specify an IP there (e.g. 172.29.0.10)')
+  }
+
+  $listen                    = hiera(listen, $ext_listen, $ext_admin_interface)
   $sshd_AllowUsers           = hiera(sshd_AllowUsers, $ext_sshd_AllowUsers)
   $sshd_AllowGroups          = hiera(sshd_AllowGroups, $ext_sshd_AllowGroups)
   $sshd_DenyUsers            = hiera(sshd_DenyUsers, $ext_sshd_DenyUsers)
@@ -51,10 +50,7 @@ class secc_sshd (
   include secc_sshd::install
 
   class { 'secc_sshd::config':
-    admin_interface           => $admin_interface,
-    admininterface_nr         => $admininterface_nr,
-    admininterface_xen0       => $admininterface_xen0,
-    setListenAddress          => $setListenAddress,
+    listen                    => $listen,
     sshd_AllowUsers           => $sshd_AllowUsers,
     sshd_AllowGroups          => $sshd_AllowGroups,
     sshd_DenyUsers            => $sshd_DenyUsers,
@@ -78,5 +74,4 @@ class secc_sshd (
     ssh_Ciphers       => $ssh_Ciphers,
     ssh_MACs          => $ssh_MACs,
   }
-
 }

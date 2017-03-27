@@ -1,10 +1,7 @@
 # config
 class secc_sshd::config (
-  $admin_interface,
-  $admininterface_nr,
-  $admininterface_xen0,
   $issue_banner,
-  $setListenAddress,
+  $listen,
   $sshd_AllowUsers,
   $sshd_AllowGroups,
   $sshd_DenyUsers,
@@ -17,15 +14,6 @@ class secc_sshd::config (
   $sshd_AuthorizedKeysFile,
   $servicename
 ) {
-
-  if ($setListenAddress) {
-    
-    if ($::virtual == 'xen0') {
-      $string = "@ipaddress_${admin_interface[0]}"
-      $adminip = inline_template("<%= ${string} %>")
-    }
-    
-  } 
 
   file { '/etc/ssh/sshd_config':
     ensure  => present,
@@ -67,4 +55,3 @@ class secc_sshd::config (
   }
 
 }
-
