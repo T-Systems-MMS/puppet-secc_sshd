@@ -1,7 +1,7 @@
 # SecC Linux SSH Hardening
 class secc_sshd (
   $ext_listen                    = undef,
-  $ext_admin_interface           = ['eth0'],
+  $ext_admin_interface           = undef,
   $ext_sshd_AllowUsers           = 'root rootuser',
   $ext_sshd_AllowGroups          = '',
   $ext_sshd_DenyUsers            = '',
@@ -21,14 +21,6 @@ class secc_sshd (
 
   if ($ext_admin_interface) {
     fail('using variable ext_admin_interface is deprecated, cancel puppet run | please use ext_listen and specify an IP there (e.g. 172.29.0.10)')
-  }
-
-  if ($ext_admininterface_nr) {
-    fail('using variable ext_admininterface_nr is deprecated, cancel puppet run | please use ext_listen and specify an IP there (e.g. 172.29.0.10)')
-  }
-
-  if ($ext_admininterface_xen0) {
-    fail('using variable ext_admininterface_xen0 is deprecated, cancel puppet run | please use ext_listen and specify an IP there (e.g. 172.29.0.10)')
   }
 
   $listen                    = hiera(listen, $ext_listen, $ext_admin_interface)
