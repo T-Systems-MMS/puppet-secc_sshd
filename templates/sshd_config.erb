@@ -36,10 +36,8 @@ Ciphers <%= @sshd_Ciphers %>
 <%- @listen.reject{ |x| x.strip.empty? }.each do |l| -%>
 ListenAddress <%= l %>
 <%- end -%>
-<%- elsif not @listen.strip.empty? -%>
-ListenAddress <%= @listen %>
 <%- else -%>
-ListenAddress <%= @ipaddress %>
+ListenAddress <%= @listen %>
 <%- end -%>
 
 ############################
@@ -159,7 +157,6 @@ AcceptEnv XMODIFIERS
 HostKey /etc/ssh/ssh_host_rsa_key
 KeyRegenerationInterval 1h
 ServerKeyBits 2048
-SyslogFacility AUTHPRIV
 
 LoginGraceTime 2m
 

@@ -1,6 +1,6 @@
 # SecC Linux SSH Hardening
 class secc_sshd (
-  $ext_listen                    = undef,
+  $ext_listen                    = [$::ipaddress],
   $ext_admin_interface           = undef,
   $ext_sshd_AllowUsers           = 'root rootuser',
   $ext_sshd_AllowGroups          = '',
