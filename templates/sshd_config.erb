@@ -24,8 +24,9 @@ Protocol 2
 ############################
 Ciphers <%= @sshd_Ciphers %>
 <% if @virtual != "xen0" -%>MACs <%= @sshd_MACs %><% end %>
-<% if @virtual == "xen0" -%>MACs hmac-sha1<% end %>
+<% if @virtual == "xen0" -%><% if @operatingsystem == 'XenServer' and @operatingsystemmajrelease == '7' %>MACs <%= @sshd_MACs %><% else -%>MACs hmac-sha1<% end %><% end %>
 <% if @virtual != "xen0" -%><% if @osfamily == 'RedHat' and @operatingsystemmajrelease == '5' -%><% else -%>KexAlgorithms <%= @sshd_KexAlgorithms %><% end %><% end %>
+<% if @operatingsystem == 'XenServer' and @operatingsystemmajrelease == '7' -%>KexAlgorithms <%= @sshd_KexAlgorithms %><% end %>
 
 ############################
 # Req 3 Der SSH-Serverdienst muss ausschliesslich an die Schnittstellen und/oder IP-Adressen gebunden werden, auf denen dieser Dienst erforderlich ist.
