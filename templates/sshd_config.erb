@@ -119,6 +119,9 @@ PubKeyAuthentication yes
 PermitRootLogin without-password
 
 AuthorizedKeysFile <%= @sshd_AuthorizedKeysFile %>
+<% if @sshd_AuthorizedKeysCommand and @sshd_AuthorizedKeysCommand != "" -%>
+AuthorizedKeysCommand <%= @sshd_AuthorizedKeysCommand %>
+<% end -%>
 
 RhostsRSAAuthentication no
 HostbasedAuthentication no
