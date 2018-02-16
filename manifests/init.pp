@@ -24,20 +24,6 @@ class secc_sshd (
     fail('using variable ext_admin_interface is deprecated, cancel puppet run | please use ext_listen and specify an IP there (e.g. 172.29.0.10)')
   }
 
-  if (hiera(sshd_AllowUsers) != undef and ("" in [hiera(sshd_AllowUsers)])) {
-    $sshd_AllowUsers = undef
-  }
-  else {
-    $sshd_AllowUsers = hiera(sshd_AllowUsers, $ext_sshd_AllowUsers)
-  }
-  
-  if (hiera(sshd_AllowGroups) != undef and ("" in [hiera(sshd_AllowGroups)])) {
-    $sshd_AllowGroups = undef
-  }
-  else {
-    $sshd_AllowGroups = hiera(sshd_AllowGroups, $ext_sshd_AllowGroups)
-  }
-  
   $listen                     = hiera(listen, $ext_listen, $ext_admin_interface)
   $sshd_DenyUsers             = hiera(sshd_DenyUsers, $ext_sshd_DenyUsers)
   $sshd_DenyGroups            = hiera(sshd_DenyGroups, $ext_sshd_DenyGroups)
