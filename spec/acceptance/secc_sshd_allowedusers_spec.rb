@@ -36,8 +36,8 @@ describe 'Class secc_sshd' do
       it { is_expected.to be_owned_by 'root' }
       it { is_expected.to be_grouped_into 'root' }
       it { is_expected.to be_mode 600 }
-      its(:content) { is_expected.to_not 'AllowUsers' }
-      its(:content) { is_expected.to_not 'AllowGroups' }
+      its(:content) { is_expected.to_not include 'AllowUsers' }
+      its(:content) { is_expected.to_not include 'AllowGroups' }
     end
   end
 end
