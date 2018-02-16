@@ -25,6 +25,8 @@ class secc_sshd (
   }
 
   $listen                     = hiera(listen, $ext_listen, $ext_admin_interface)
+  $sshd_AllowUsers            = hiera(sshd_AllowUsers, $ext_sshd_AllowUsers)
+  $sshd_AllowGroups           = hiera(sshd_AllowGroups, $ext_sshd_AllowGroups)
   $sshd_DenyUsers             = hiera(sshd_DenyUsers, $ext_sshd_DenyUsers)
   $sshd_DenyGroups            = hiera(sshd_DenyGroups, $ext_sshd_DenyGroups)
   $sshd_KexAlgorithms         = hiera(sshd_KexAlgorithm, $ext_sshd_KexAlgorithms)
