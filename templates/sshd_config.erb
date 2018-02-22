@@ -121,6 +121,9 @@ PermitRootLogin without-password
 AuthorizedKeysFile <%= @sshd_AuthorizedKeysFile %>
 <% if @sshd_AuthorizedKeysCommand and @sshd_AuthorizedKeysCommand != "" -%>
 AuthorizedKeysCommand <%= @sshd_AuthorizedKeysCommand %>
+<% if @osfamily == 'RedHat' and @operatingsystemmajrelease >= '7' -%>
+AuthorizedKeysCommandUser <%= @sshd_AuthorizedKeysCommandUser %>
+<% end -%>
 <% end -%>
 
 RhostsRSAAuthentication no
