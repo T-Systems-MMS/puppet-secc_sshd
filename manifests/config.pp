@@ -13,6 +13,7 @@ class secc_sshd::config (
   $sshd_MACs,
   $sshd_AuthorizedKeysFile,
   $sshd_AuthorizedKeysCommand,
+  $sshd_AuthorizedKeysCommandUser,
   $servicename
 ) {
 
