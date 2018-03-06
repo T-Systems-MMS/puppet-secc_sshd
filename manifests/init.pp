@@ -13,7 +13,7 @@ class secc_sshd (
   $ext_sshd_MACs                      = 'hmac-sha2-512,hmac-sha2-256',
   $ext_sshd_AuthorizedKeysFile        = '.ssh/authorized_keys',
   $ext_sshd_AuthorizedKeysCommand     = undef,
-  $ext_sshd_authorizedkeyscommandUser = 'nobody',
+  $ext_sshd_AuthorizedKeysCommandUser = 'nobody',
   $ext_ssh_KexAlgorithms              = 'diffie-hellman-group-exchange-sha256',
   $ext_ssh_Ciphers                    = 'aes256-ctr',
   $ext_ssh_MACs                       = 'hmac-sha2-512,hmac-sha2-256',
