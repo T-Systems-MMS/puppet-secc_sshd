@@ -1,15 +1,15 @@
 require 'spec_helper_acceptance'
 
 describe 'Class secc_sshd' do
-  context 'with custom sshd and ssh config' do
+  context 'with custom sshd and ssh config (allowedusers)' do
 
     command("service sshd stop")
 
     let(:manifest) {
     <<-EOS
       class { 'secc_sshd':
-        hiera(sshd_AllowUsers) => '',
-        hiera(sshd_AllowGroups) => '',
+        ext_sshd_AllowUsers => '',
+        ext_sshd_AllowGroups => '',
       }
     EOS
     }
