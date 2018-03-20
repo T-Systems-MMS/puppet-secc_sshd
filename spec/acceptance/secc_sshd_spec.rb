@@ -93,6 +93,7 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'SendEnv LC_IDENTIFICATION LC_ALL LANGUAGE' }
       its(:content) { is_expected.to include 'SendEnv XMODIFIERS' }
       its(:content) { is_expected.to include 'StrictHostKeyChecking ask' }
+      its(:content) { is_expected.to include 'VerifyHostKeyDNS ask' }
       its(:content) { is_expected.to include 'ForwardAgent no' }
       its(:content) { is_expected.to include 'ForwardX11 no' }
       its(:content) { is_expected.to include 'ForwardX11Trusted no' }
