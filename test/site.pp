@@ -1,0 +1,1 @@
+class { 'secc_sshd': }

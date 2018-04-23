@@ -1,0 +1,13 @@
+{
+  "author": "rkno",
+  "dependencies": [],
+  "license": "",
+  "name": "secc_sshd",
+  "operatingsystem_support": [ "RHEL6", "RHEL7", "CentOS6", "CentOS7" ],
+  "project_page": "",
+  "requirements": [],
+  "source": "",
+  "summary": "",
+  "tags": [],
+  "version": "2.4.2"
+}

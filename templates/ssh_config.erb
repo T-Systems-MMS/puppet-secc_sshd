@@ -1,0 +1,59 @@
+########################################
+### MANAGED BY PUPPET ['secc_sshd']  ###
+###   DON'T CHANGE THIS FILE HERE    ###
+###   DO IT ON THE PUPPET MASTER!    ###
+########################################
+
+Host *
+        GSSAPIAuthentication no
+
+        SendEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+        SendEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+        SendEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+        SendEnv XMODIFIERS
+
+############################
+# Req 19 Fuer SSH-Clients gilt, der Schluessel des SSH-Servers (Hostkey) muss bei der Anmeldung ueberprueft werden.
+############################
+StrictHostKeyChecking ask
+VerifyHostKeyDNS ask
+
+############################
+# Req 20 Fuer SSH-Client gilt, dass private Schluessel geschuetzt werden muessen.
+# *Smartcard (MyCard)
+# *Schluessel mit einer Passphrase geschuetzt sein
+# *"command=" bzw "from=" Direktive
+#	Wird nicht auf den Zielsystemen umgesetzt, sondern auf Sprungservern.
+############################
+Host *
+ForwardAgent no
+ForwardX11 no
+ForwardX11Trusted no
+
+############################
+# Req 21 Fuer SSH-Clients gilt, dass die Verwendung eines SSH-Authentifizierungsagenten.
+# 	Wird nicht auf den Zielsystemen umgesetzt, sondern auf Sprungservern.
+############################
+
+############################
+# Req 22 Fuer SSH-Clients gilt, dass Gateway-Ports nicht auf Client-Seite aktiviert werden duerfen.
+############################
+GatewayPorts no
+
+############################
+# Ciphers and Algorithms
+############################
+Ciphers <%= @ssh_Ciphers %>
+MACs <%= @ssh_MACs %>
+KexAlgorithms <%= @ssh_KexAlgorithms %>
+
+############################
+# CVE-2016-0777 & CVE-2016-0778
+############################
+UseRoaming no
+
+############################
+# to not reveal networking data - http://linux-audit.com/audit-ssh-configurations-hashknownhosts-option/
+############################
+HashKnownHosts yes
+

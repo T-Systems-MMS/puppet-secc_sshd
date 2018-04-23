@@ -1,0 +1,11 @@
+/.project
+.kitchen/
+.tmp/
+.librarian/
+/.idea/
+/log/
+/.vagrant/
+/junit/
+*.iml
+Puppetfile.lock
+Gemfile.lock
