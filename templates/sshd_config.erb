@@ -111,7 +111,9 @@ LogLevel VERBOSE
 # Req 18 Der Fingerprint des Hostkeys oder der Hostkey muss zur Verfuegung gestellt werden.
 #       Abweichung: Wird nicht auf den einzelnen Servern realisiert.
 ############################
-PasswordAuthentication no
+<% if @sshd_PasswordAuthentication and @sshd_PasswordAuthentication != "" -%>
+PasswordAuthentication <%= @sshd_PasswordAuthentication %>
+<% end -%>
 RSAAuthentication yes
 ChallengeResponseAuthentication no
 PermitEmptyPasswords no
