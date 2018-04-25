@@ -14,7 +14,7 @@ class secc_sshd::config (
   $sshd_AuthorizedKeysFile,
   $sshd_AuthorizedKeysCommand,
   $sshd_AuthorizedKeysCommandUser,
-  $sshd_PasswordAuthentication,
+  $sshd_ChallengeResponseAuthentication,
   $servicename
 ) {
 
