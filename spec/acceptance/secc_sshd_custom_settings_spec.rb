@@ -8,12 +8,12 @@ describe 'Class secc_sshd' do
     let(:manifest) {
     <<-EOS
       class { 'secc_sshd':
-        ext_listen           => ['127.0.0.1', '0.0.0.0'],
-        ext_sshd_AllowUsers  => 'root test',
-        ext_sshd_AllowGroups => 'root test',
-        ext_sshd_DenyUsers   => 'test_deny',
-        ext_sshd_DenyGroups  => 'test_deny',
-
+        ext_listen                                => ['127.0.0.1', '0.0.0.0'],
+        ext_sshd_AllowUsers                       => 'root test',
+        ext_sshd_AllowGroups                      => 'root test',
+        ext_sshd_DenyUsers                        => 'test_deny',
+        ext_sshd_DenyGroups                       => 'test_deny',
+        ext_sshd_ChallengeResponseAuthentication  => 'yes',
       }
     EOS
     }
@@ -46,6 +46,7 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'AllowGroups root test' }
       its(:content) { is_expected.to include 'DenyUsers test_deny' }
       its(:content) { is_expected.to include 'DenyGroups test_deny' }
+      its(:content) { is_expected.to include 'ChallengeResponseAuthentication yes' }
     end
   end
 end
