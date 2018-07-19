@@ -1,0 +1,30 @@
+---
+language: ruby
+sudo: required
+services:
+  - docker
+bundler_args: --without system_tests
+script:
+  - gem install bundler
+  - bundle install --path vendor/bundle
+  - bundle exec rake
+matrix:
+  include:
+  - rvm: 2.1.8
+    env: PUPPET_VERSION="~> 3.0" BEAKER_set="docker-centos6"
+  - rvm: default
+    env: PUPPET_VERSION="~> 4.0" BEAKER_set="docker-centos6-pc1"
+  - rvm: 2.1.8
+    env: PUPPET_VERSION="~> 3.0" BEAKER_set="docker-centos7"
+  - rvm: default
+    env: PUPPET_VERSION="~> 4.0" BEAKER_set="docker-centos7-pc1" DEPLOY_TO_FORGE=yes
+deploy:
+  provider: puppetforge
+  user: tsystemsmms
+  password:
+    secure: WFvh6BWXMRHz58VAdJ78dx57w8pHxQdx6UmfdpghMC8L+iuU3BVVdPzMKbJyLn35svRcXgMaeTgf/8KN/VEio9BDBx3ncnYv/RKx2eBaiIGx83HhwfMpYeGWHMf4YoaM4VkarYcK4UoJu4FRiNyb1byu2obccTUXGP1WrcltxliGiLC7GXX4diZsacYs/WOW++6DMRbTonLrseBPlkFzKcXyi6fpQ8JJ28LDLxEww0JuoqTDzvWQeI3zdXAdYqUFbzZH4TI8RachuPdK/0GnFS8qQtQ9VHiocT5gPmabXa4g9kg/9wcc220XcRj0Eg1vcMtafotSd8GbHBI1jWztVG0jJk/496SdjFywYpiO778yWow92rmipBTKMaJ75XyLYTq8NP1C2obxGAYieW4RqIEzFN+7hgHi19NFqH+VRB43/HGfemvQHUTXbUIP+AfLuczdiYpHdH5cRM7WC0bdm7smPs7MNR6tOvh6mIzKgd4iqRONtAa+mclJa47wwDzYWVM8IQzipUzjqKOaSDeTbTp5gHDxBuWniZhvbzeU1DMGZieJ6gCJF3agDkJaS0b2OPrg9vWtdb5Rgh3gObyJCVKBzUUS3GjfZqDYQ4WKz6I0dMDkRFnNlfSZ2dwcot7NFKle8u+ezNgC64DotdIaZhIAq44z02IFD3ZaCJloF1Q=
+  on:
+    tags: true
+    all_branches: true
+    condition: "$DEPLOY_TO_FORGE = yes"
+
