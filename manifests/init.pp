@@ -18,8 +18,6 @@ class secc_sshd (
   $ext_ssh_KexAlgorithms                    = 'diffie-hellman-group-exchange-sha256',
   $ext_ssh_Ciphers                          = 'aes256-ctr',
   $ext_ssh_MACs                             = 'hmac-sha2-512,hmac-sha2-256',
-  $ext_servicename                          = 'change me - Servicename',
-  $ext_issue_banner                         = true,
 ) {
 
   if ($ext_admin_interface) {
@@ -43,8 +41,6 @@ class secc_sshd (
   $ssh_KexAlgorithms                    = hiera(ssh_KexAlgorithm, $ext_ssh_KexAlgorithms)
   $ssh_Ciphers                          = hiera(ssh_Ciphers, $ext_ssh_Ciphers)
   $ssh_MACs                             = hiera(ssh_MACs, $ext_ssh_MACs)
-  $servicename                          = hiera(servicename, $ext_servicename)
-  $issue_banner                         = hiera(issue_banner, $ext_issue_banner)
   include secc_sshd::install
 
   class { 'secc_sshd::config':
@@ -62,8 +58,6 @@ class secc_sshd (
     sshd_AuthorizedKeysCommand           => $sshd_AuthorizedKeysCommand,
     sshd_AuthorizedKeysCommandUser       => $sshd_AuthorizedKeysCommandUser,
     sshd_ChallengeResponseAuthentication => $sshd_ChallengeResponseAuthentication,
-    servicename                          => $servicename,
-    issue_banner                         => $issue_banner,
     require                              => Class['secc_sshd::install'],
     notify                               => Class['secc_sshd::service'],
   }
