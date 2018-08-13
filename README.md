@@ -5,7 +5,7 @@
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Fragen und Anmerkungen](#fragen)
+2. [Some important remarks](#important)
 3. [Module Description - What the module does and why it is useful](#module-description)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
@@ -47,7 +47,7 @@ This module controls /etc/ssh/sshd_config, /etc/ssh/ssh_config, /etc/issue and /
 
 - Either include the module via git or puppetforge. (T-Systems is using r10k)
 
-### Usage ohne Puppet
+### Usage without Puppet
 
 - The templates, ssh_config.erb and sshd_config.erb, can be used without puppet. There is no deep ruby or puppet knowhow needed.
 - The disclaimer, that those files are managed by puppet, should be removed.
