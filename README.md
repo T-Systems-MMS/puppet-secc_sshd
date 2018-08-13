@@ -58,7 +58,7 @@ This module controls /etc/ssh/sshd_config, /etc/ssh/ssh_config, /etc/issue and /
 
 ## Reference
 
-- The hardening requirements are from Telekom Security, Privacy and Security Assessment - 3_04_Secure_Shell_(SSH). Last verified on 2018-07-31.
+- The hardening requirements are from Telekom Security, [Privacy and Security Assessment](https://www.telekom.com/psa) - 3_04_Secure_Shell_(SSH). Last verified on 2018-07-31.
 
 ## Limitations
 
