@@ -15,6 +15,7 @@ class secc_sshd (
   $ext_sshd_AuthorizedKeysCommand           = undef,
   $ext_sshd_AuthorizedKeysCommandUser       = 'nobody',
   $ext_sshd_ChallengeResponseAuthentication = 'no',
+  $ext_ssh_ForwardAgent                     = 'no',
   $ext_ssh_KexAlgorithms                    = 'diffie-hellman-group-exchange-sha256',
   $ext_ssh_Ciphers                          = 'aes256-ctr',
   $ext_ssh_MACs                             = 'hmac-sha2-512,hmac-sha2-256',
@@ -38,6 +39,7 @@ class secc_sshd (
   $sshd_AuthorizedKeysCommand           = hiera(sshd_AuthorizedKeysCommand, $ext_sshd_AuthorizedKeysCommand)
   $sshd_AuthorizedKeysCommandUser       = hiera(sshd_AuthorizedKeysCommandUser, $ext_sshd_AuthorizedKeysCommandUser)
   $sshd_ChallengeResponseAuthentication = hiera(sshd_ChallengeResponseAuthentication, $ext_sshd_ChallengeResponseAuthentication)
+  $ssh_ForwardAgent                     = hiera(ssh_ForwardAgent, $ext_ssh_ForwardAgent)
   $ssh_KexAlgorithms                    = hiera(ssh_KexAlgorithm, $ext_ssh_KexAlgorithms)
   $ssh_Ciphers                          = hiera(ssh_Ciphers, $ext_ssh_Ciphers)
   $ssh_MACs                             = hiera(ssh_MACs, $ext_ssh_MACs)
@@ -65,6 +67,7 @@ class secc_sshd (
   include secc_sshd::service
 
   class { 'secc_sshd::ssh_config':
+    ssh_ForwardAgent  => $ssh_ForwardAgent,
     ssh_KexAlgorithms => $ssh_KexAlgorithms,
     ssh_Ciphers       => $ssh_Ciphers,
     ssh_MACs          => $ssh_MACs,
