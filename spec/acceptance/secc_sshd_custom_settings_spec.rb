@@ -48,6 +48,13 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'DenyUsers test_deny' }
       its(:content) { is_expected.to include 'DenyGroups test_deny' }
       its(:content) { is_expected.to include 'ChallengeResponseAuthentication yes' }
+    end
+
+    describe file('/etc/ssh/ssh_config') do
+      it { is_expected.to be_file }
+      it { is_expected.to be_owned_by 'root' }
+      it { is_expected.to be_grouped_into 'root' }
+      it { is_expected.to be_mode 644 }
       its(:content) { is_expected.to include 'ForwardAgent yes' }
     end
   end
