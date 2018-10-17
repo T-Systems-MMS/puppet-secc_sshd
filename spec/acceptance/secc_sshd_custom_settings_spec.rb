@@ -14,6 +14,7 @@ describe 'Class secc_sshd' do
         ext_sshd_DenyUsers                        => 'test_deny',
         ext_sshd_DenyGroups                       => 'test_deny',
         ext_sshd_ChallengeResponseAuthentication  => 'yes',
+        ext_ssh_ForwardAgent                      => 'yes'
       }
     EOS
     }
@@ -47,6 +48,7 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'DenyUsers test_deny' }
       its(:content) { is_expected.to include 'DenyGroups test_deny' }
       its(:content) { is_expected.to include 'ChallengeResponseAuthentication yes' }
+      its(:content) { is_expected.to include 'ForwardAgent yes' }
     end
   end
 end
