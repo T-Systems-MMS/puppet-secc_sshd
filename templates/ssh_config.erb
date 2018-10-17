@@ -26,7 +26,7 @@ VerifyHostKeyDNS ask
 #	Wird nicht auf den Zielsystemen umgesetzt, sondern auf Sprungservern.
 ############################
 Host *
-ForwardAgent no
+ForwardAgent <%= @ssh_ForwardAgent %>
 ForwardX11 no
 ForwardX11Trusted no
 

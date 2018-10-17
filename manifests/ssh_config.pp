@@ -2,6 +2,7 @@
 class secc_sshd::ssh_config (
   $ssh_KexAlgorithms,
   $ssh_Ciphers,
+  $ssh_ForwardAgent,
   $ssh_MACs
 ) {
 
