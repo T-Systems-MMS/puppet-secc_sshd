@@ -8,7 +8,7 @@ class secc_sshd::install {
   if $::operatingsystem == 'XCP' {
     package { 'openssh':
     # we set it to installed, because xcp-ng will handle the updates of sshd by it self
-    ensure => installed,
+    ensure   => installed,
     provider => yum,
     }
   }
