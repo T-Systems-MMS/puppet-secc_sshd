@@ -14,6 +14,7 @@ class secc_sshd::config (
   $sshd_AuthorizedKeysCommand,
   $sshd_AuthorizedKeysCommandUser,
   $sshd_ChallengeResponseAuthentication,
+  $sshd_match_users,
 ) {
 
   file { '/etc/ssh/sshd_config':

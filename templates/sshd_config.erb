@@ -176,3 +176,12 @@ Compression delayed
 
 ClientAliveInterval 120
 ClientAliveCountMax 3
+
+<% if @sshd_match_users -%>
+<% @sshd_match_users.each do |user,settings| -%>
+Match User <%= user %>
+  <% settings.each do |setting,value| -%>
+    <%= setting %> <%= value %>
+  <% end -%>
+<% end -%>
+<% end -%>
