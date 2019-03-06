@@ -1,6 +1,9 @@
 # CHANGELOG
 ## [UNRELEASED]
 
+## [2.9.0] - 2019-03-06
+* added support for Match User directive
+
 ## [2.8.0] - 2019-02-20
 * added compatibility for xcp-ng hypervisor
 
