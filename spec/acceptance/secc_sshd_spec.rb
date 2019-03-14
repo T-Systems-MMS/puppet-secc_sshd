@@ -50,13 +50,11 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'SyslogFacility AUTHPRIV' }
       its(:content) { is_expected.to include 'LogLevel VERBOSE' }
       its(:content) { is_expected.to include 'PasswordAuthentication no' }
-      its(:content) { is_expected.to include 'RSAAuthentication yes' }
       its(:content) { is_expected.to include 'ChallengeResponseAuthentication no' }
       its(:content) { is_expected.to include 'PermitEmptyPasswords no' }
       its(:content) { is_expected.to include 'PubKeyAuthentication yes' }
       its(:content) { is_expected.to include 'PermitRootLogin without-password' }
       its(:content) { is_expected.to include 'AuthorizedKeysFile .ssh/authorized_keys' }
-      its(:content) { is_expected.to include 'RhostsRSAAuthentication no' }
       its(:content) { is_expected.to include 'HostbasedAuthentication no' }
       its(:content) { is_expected.to include 'IgnoreRhosts yes' }
       its(:content) { is_expected.to include 'StrictModes yes' }
@@ -72,8 +70,6 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'AcceptEnv XMODIFIERS' }
       its(:content) { is_expected.to include 'Subsystem       sftp    /usr/libexec/openssh/sftp-server' }
       its(:content) { is_expected.to include 'HostKey /etc/ssh/ssh_host_rsa_key' }
-      its(:content) { is_expected.to include 'KeyRegenerationInterval 1h' }
-      its(:content) { is_expected.to include 'ServerKeyBits 2048' }
       its(:content) { is_expected.to include 'LoginGraceTime 2m' }
       its(:content) { is_expected.to include 'TCPKeepAlive yes' }
       its(:content) { is_expected.to include 'Compression delayed' }

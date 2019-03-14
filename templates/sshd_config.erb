@@ -115,7 +115,6 @@ LogLevel VERBOSE
 ChallengeResponseAuthentication <%= @sshd_ChallengeResponseAuthentication %>
 <% end -%>
 PasswordAuthentication no
-RSAAuthentication yes
 PermitEmptyPasswords no
 PubKeyAuthentication yes
 PermitRootLogin without-password
@@ -128,7 +127,6 @@ AuthorizedKeysCommandUser <%= @sshd_AuthorizedKeysCommandUser %>
 <% end -%>
 <% end -%>
 
-RhostsRSAAuthentication no
 HostbasedAuthentication no
 IgnoreRhosts yes
 
@@ -164,8 +162,6 @@ AcceptEnv XMODIFIERS
 <%# now RedHat or CentOS %><% if @operatingsystem != "SLES" -%>Subsystem       sftp    /usr/libexec/openssh/sftp-server<% end -%>
 
 HostKey /etc/ssh/ssh_host_rsa_key
-KeyRegenerationInterval 1h
-ServerKeyBits 2048
 
 LoginGraceTime 2m
 
