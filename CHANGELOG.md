@@ -1,6 +1,9 @@
 # CHANGELOG
 ## [UNRELEASED]
 
+## [3.0.0] - 2019-03-19
+* removed deprecated protocol v1 options from sshd config
+
 ## [2.9.0] - 2019-03-06
 * added support for Match User directive
 
