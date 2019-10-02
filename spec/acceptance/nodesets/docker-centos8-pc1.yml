@@ -1,0 +1,12 @@
+HOSTS:
+  centos-8-x64-ag1:
+    roles:
+      - agent
+    platform: el-8-x86_64
+    image: centos:8
+    hypervisor: docker
+    docker_cmd: '["/sbin/init"]'
+    docker_preserve_image: true
+CONFIG:
+  type: aio
+  trace_limit: 1000
