@@ -61,7 +61,9 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'HostbasedAuthentication no' }
       its(:content) { is_expected.to include 'IgnoreRhosts yes' }
       its(:content) { is_expected.to include 'StrictModes yes' }
-      its(:content) { is_expected.to include 'UsePrivilegeSeparation yes' }
+      if os[:family] == 'redhat' && os[:release].to_i < 8
+        its(:content) { is_expected.to include 'UsePrivilegeSeparation yes' }
+      end
       its(:content) { is_expected.to include 'Banner /etc/issue' }
       its(:content) { is_expected.to include 'PrintMotd yes' }
       its(:content) { is_expected.to include 'GSSAPIAuthentication no' }
@@ -100,7 +102,9 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'Ciphers aes256-ctr' }
       its(:content) { is_expected.to include 'MACs hmac-sha2-512,hmac-sha2-256' }
       its(:content) { is_expected.to include 'KexAlgorithms diffie-hellman-group-exchange-sha256' }
-      its(:content) { is_expected.to include 'UseRoaming no' }
+      if os[:family] == 'redhat' && os[:release].to_i < 7
+        its(:content) { is_expected.to include 'UseRoaming no' }
+      end
       its(:content) { is_expected.to include 'HashKnownHosts yes' }
     end
 
