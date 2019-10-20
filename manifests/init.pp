@@ -15,6 +15,7 @@ class secc_sshd (
   $ext_sshd_AuthorizedKeysCommand           = undef,
   $ext_sshd_AuthorizedKeysCommandUser       = 'nobody',
   $ext_sshd_ChallengeResponseAuthentication = 'no',
+  $ext_sshd_PermitRootLogin                 = 'without-password',
   $ext_ssh_ForwardAgent                     = 'no',
   $ext_ssh_KexAlgorithms                    = 'diffie-hellman-group-exchange-sha256',
   $ext_ssh_Ciphers                          = 'aes256-ctr',
@@ -40,6 +41,7 @@ class secc_sshd (
   $sshd_AuthorizedKeysCommand           = hiera(sshd_AuthorizedKeysCommand, $ext_sshd_AuthorizedKeysCommand)
   $sshd_AuthorizedKeysCommandUser       = hiera(sshd_AuthorizedKeysCommandUser, $ext_sshd_AuthorizedKeysCommandUser)
   $sshd_ChallengeResponseAuthentication = hiera(sshd_ChallengeResponseAuthentication, $ext_sshd_ChallengeResponseAuthentication)
+  $sshd_PermitRootLogin                 = hiera(sshd_ChallengeResponseAuthentication, $ext_sshd_PermitRootLogin)
   $sshd_match_users                     = hiera(sshd_match_users, $ext_sshd_match_users)
   $ssh_ForwardAgent                     = hiera(ssh_ForwardAgent, $ext_ssh_ForwardAgent)
   $ssh_KexAlgorithms                    = hiera(ssh_KexAlgorithm, $ext_ssh_KexAlgorithms)
@@ -62,6 +64,7 @@ class secc_sshd (
     sshd_AuthorizedKeysCommand           => $sshd_AuthorizedKeysCommand,
     sshd_AuthorizedKeysCommandUser       => $sshd_AuthorizedKeysCommandUser,
     sshd_ChallengeResponseAuthentication => $sshd_ChallengeResponseAuthentication,
+    sshd_PermitRootLogin                 => $sshd_PermitRootLogin,
     sshd_match_users                     => $sshd_match_users,
     require                              => Class['secc_sshd::install'],
     notify                               => Class['secc_sshd::service'],

@@ -1,1 +1,2 @@
 --relative
+--no-variable_is_lowercase-check

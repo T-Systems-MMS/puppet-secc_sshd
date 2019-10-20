@@ -13,6 +13,8 @@ Rakefile:
   requires:
     - require: 'puppet_litmus/rake_tasks'
       conditional: "Bundler.rubygems.find_name('puppet_litmus').any?"
+  extra_disabled_lint_checks:
+    - 'variable_is_lowercase'
 
 .travis.yml:
   unmanaged: true
