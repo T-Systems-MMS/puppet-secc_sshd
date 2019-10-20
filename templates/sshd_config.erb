@@ -133,7 +133,9 @@ IgnoreRhosts yes
 #       Dies ist standardmaessig nicht realisiert und muss projektindividuell geloest werden.
 ############################
 StrictModes yes
+<% if @osfamily == 'RedHat' and @operatingsystemmajrelease < '8' -%>
 UsePrivilegeSeparation yes
+<% end -%>
 
 ############################
 # Warning-Banner vor dem Login und Hinweis nach dem Login

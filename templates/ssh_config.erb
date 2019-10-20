@@ -47,10 +47,12 @@ Ciphers <%= @ssh_Ciphers %>
 MACs <%= @ssh_MACs %>
 KexAlgorithms <%= @ssh_KexAlgorithms %>
 
+<% if @osfamily == 'RedHat' and @operatingsystemmajrelease < '7' -%>
 ############################
 # CVE-2016-0777 & CVE-2016-0778
 ############################
 UseRoaming no
+<% end -%>
 
 ############################
 # to not reveal networking data - http://linux-audit.com/audit-ssh-configurations-hashknownhosts-option/
