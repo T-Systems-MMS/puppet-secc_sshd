@@ -103,5 +103,20 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'UseRoaming no' }
       its(:content) { is_expected.to include 'HashKnownHosts yes' }
     end
+
+    describe run_shell('puppet facts | grep secc_sshd_info -A3') do
+      its(:stdout) { is_expected.to include '    "secc_sshd_info"' }
+      its(:stdout) { is_expected.to include '      "version": "openssh' }
+      its(:stdout) { is_expected.to include '      "last_update": "2019' }
+      its(:stdout) { is_expected.to include '      "last_update_unixtime": "1' }
+    end
+
+    describe run_shell('/usr/sbin/sshd -t') do
+      its(:stderr) { is_expected.not_to include 'Deprecated option' }
+    end
+
+    describe run_shell('ssh -v localhost id 2>&1 | grep "Deprecated option"', expect_failures: true) do
+      its(:stdout) { is_expected.not_to include 'Deprecated option' }
+    end
   end
 end
