@@ -2,11 +2,9 @@ require 'spec_helper_acceptance'
 
 describe 'Class secc_sshd' do
   context 'with custom sshd and ssh config' do
+    run_shell('pkill -F /var/run/sshd.pid; service sshd start')
 
-    command("service sshd stop")
-
-    let(:manifest) {
-    <<-EOS
+    manifest = <<-EOS
       class { 'secc_sshd':
         ext_listen                                => ['127.0.0.1', '0.0.0.0'],
         ext_sshd_AllowUsers                       => 'root test',
@@ -14,17 +12,13 @@ describe 'Class secc_sshd' do
         ext_sshd_DenyUsers                        => 'test_deny',
         ext_sshd_DenyGroups                       => 'test_deny',
         ext_sshd_ChallengeResponseAuthentication  => 'yes',
-        ext_ssh_ForwardAgent                      => 'yes'
+        ext_sshd_PermitRootLogin                  => 'yes',
+        ext_ssh_ForwardAgent                      => 'yes',
       }
     EOS
-    }
 
-    it 'should run without errors' do
-      expect(apply_manifest(manifest, :catch_failures => true).exit_code).to eq(2)
-    end
-
-    it 'should re-run without changes' do
-      expect(apply_manifest(manifest, :catch_changes => true).exit_code).to be_zero
+    it 'runs without errors' do
+      idempotent_apply(manifest)
     end
 
     describe package('openssh-server') do
@@ -32,8 +26,13 @@ describe 'Class secc_sshd' do
     end
 
     describe service('sshd') do
-      it { is_expected.to be_enabled }
-      it { is_expected.to be_running }
+      if os[:family] == 'redhat' && os[:release].to_i >= 7
+        it { is_expected.to be_enabled.under('systemd') }
+        it { is_expected.to be_running.under('systemd') }
+      else
+        it { is_expected.to be_enabled }
+        it { is_expected.to be_running }
+      end
     end
 
     describe file('/etc/ssh/sshd_config') do
