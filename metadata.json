@@ -1,7 +1,7 @@
 {
   "name": "tsystemsmms-secc_sshd",
-  "version": "3.0.0",
-  "author": "T-Systems Multimedia Solutions GmbH",
+  "version": "3.1.0",
+  "author": "T-Systems-MMS",
   "summary": "Dieses Modul bietet eine teilweise Abdeckung der SoC Anforderungen für SSH unter Linux.",
   "license": "Apache-2.0",
   "source": "https://github.com/T-Systems-MMS/puppet-secc_sshd",
@@ -9,7 +9,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 3.2.0 < 5.0.0"
+      "version_requirement": ">= 3.2.0 < 7.0.0"
     }
   ],
   "operatingsystem_support": [
@@ -17,21 +17,23 @@
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
         "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
         "6",
-        "7"
+        "7",
+        "8"
       ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.0.0 < 5.0.0"
+      "version_requirement": ">= 4.0.0 < 7.0.0"
     }
   ],
   "issues": "https://github.com/T-Systems-MMS/puppet-secc_sshd/issues",
