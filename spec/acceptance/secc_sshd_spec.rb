@@ -111,7 +111,7 @@ describe 'Class secc_sshd' do
     describe run_shell('puppet facts | grep secc_sshd_info -A3') do
       its(:stdout) { is_expected.to include '    "secc_sshd_info"' }
       its(:stdout) { is_expected.to include '      "version": "openssh' }
-      its(:stdout) { is_expected.to include '      "last_update": "2019' }
+      its(:stdout) { is_expected.to include '      "last_update": "2020' }
       its(:stdout) { is_expected.to include '      "last_update_unixtime": "1' }
     end
 
