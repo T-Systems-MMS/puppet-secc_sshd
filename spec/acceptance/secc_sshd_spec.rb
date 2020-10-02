@@ -40,7 +40,7 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'Protocol 2' }
       its(:content) { is_expected.to include 'Ciphers aes256-ctr' }
       its(:content) { is_expected.to include 'MACs hmac-sha2-512,hmac-sha2-256' }
-      its(:content) { is_expected.to include 'KexAlgorithms diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1' }
+      its(:content) { is_expected.to include 'KexAlgorithms diffie-hellman-group-exchange-sha256' }
       its(:content) { is_expected.to include 'AllowTcpForwarding no' }
       its(:content) { is_expected.to include 'GatewayPorts no' }
       its(:content) { is_expected.to include 'X11Forwarding no' }
@@ -75,7 +75,7 @@ describe 'Class secc_sshd' do
       its(:content) { is_expected.to include 'AcceptEnv XMODIFIERS' }
       its(:content) { is_expected.to include 'Subsystem       sftp    /usr/libexec/openssh/sftp-server' }
       its(:content) { is_expected.to include 'HostKey /etc/ssh/ssh_host_rsa_key' }
-      its(:content) { is_expected.to include 'LoginGraceTime 2m' }
+      its(:content) { is_expected.to include 'LoginGraceTime 1m' }
       its(:content) { is_expected.to include 'TCPKeepAlive yes' }
       its(:content) { is_expected.to include 'Compression delayed' }
       its(:content) { is_expected.to include 'ClientAliveInterval 120' }

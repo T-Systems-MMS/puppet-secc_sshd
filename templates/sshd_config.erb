@@ -163,7 +163,8 @@ AcceptEnv XMODIFIERS
 
 HostKey /etc/ssh/ssh_host_rsa_key
 
-LoginGraceTime 2m
+LoginGraceTime 1m
+MaxAuthTries 5
 
 TCPKeepAlive yes
 # Added a new compression method that delays the start of zlib compression until the user has been authenticated successfully. The new method ("Compression delayed") is on by default in the server.
