@@ -124,7 +124,11 @@ describe 'Class secc_sshd' do
     end
 
     describe run_shell('awk \'$5 < 2048 \' /etc/ssh/moduli | wc -c') do
-      its(:stdout) { is_expected.to eq 0 }
+      its(:stdout.to_i) { is_expected.to eq 0 }
+    end
+
+    describe run_shell('awk \'$5 < 2048 \' /etc/ssh/moduli | wc -l') do
+      its(:stdout.to_i) { is_expected.to be > 10 }
     end
   end
 end

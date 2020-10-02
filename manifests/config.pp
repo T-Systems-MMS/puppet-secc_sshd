@@ -28,4 +28,13 @@ class secc_sshd::config (
     notify  => Class['secc_sshd::service'],
   }
 
+  exec { 'logrotate':
+    path     => '/usr/bin:/usr/sbin:/bin',
+    provider => shell,
+    command  => 'awk \'$5 >= 2048\' /etc/ssh/moduli > /etc/ssh/moduli.new ; [ -r /etc/ssh/moduli.new -a -s /etc/ssh/moduli.new ] && mv /etc/ssh/moduli.new /etc/ssh/moduli || true',
+    onlyif   => 'test $(awk \'$5 < 2048\' /etc/ssh/moduli | wc -c) -gt 0',
+    require  => Class['secc_sshd::install'],
+    notify   => Class['secc_sshd::service'],
+  }
+
 }
