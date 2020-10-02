@@ -6,7 +6,7 @@ class secc_sshd (
   $ext_sshd_AllowGroups                     = '',
   $ext_sshd_DenyUsers                       = '',
   $ext_sshd_DenyGroups                      = '',
-  $ext_sshd_KexAlgorithms                   = 'diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1',
+  $ext_sshd_KexAlgorithms                   = 'diffie-hellman-group-exchange-sha256',
   $ext_sshd_AllowTcpForwarding              = 'no',
   $ext_sshd_AllowAgentForwarding            = 'no',
   $ext_sshd_Ciphers                         = 'aes256-ctr',
