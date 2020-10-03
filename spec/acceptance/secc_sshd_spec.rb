@@ -123,12 +123,12 @@ describe 'Class secc_sshd' do
       its(:stdout) { is_expected.not_to include 'Deprecated option' }
     end
 
-    describe run_shell('awk \'$5 < 2048 \' /etc/ssh/moduli | wc -c') do
-      its(:stdout.to_i) { is_expected.to eq 0 }
+    describe run_shell('awk \'$5 < 2048\' /etc/ssh/moduli | grep -q ^') do
+      its(:exit_status) { is_expected.to eq 0 }
     end
 
-    describe run_shell('awk \'$5 < 2048 \' /etc/ssh/moduli | wc -l') do
-      its(:stdout.to_i) { is_expected.to be > 10 }
+    describe run_shell('awk \'$5 >= 2048\' /etc/ssh/moduli | grep -q " 3071 "') do
+      its(:exit_status) { is_expected.to eq 0 }
     end
   end
 end
