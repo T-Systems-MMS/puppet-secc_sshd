@@ -2,9 +2,17 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [v3.2.0](https://github.com/T-Systems-MMS/puppet-secc_sshd/tree/v3.2.0) (2020-10-04)
+## [v4.0.0](https://github.com/T-Systems-MMS/puppet-secc_sshd/tree/v4.0.0) (2020-10-04)
 
-[Full Changelog](https://github.com/T-Systems-MMS/puppet-secc_sshd/compare/3.1.0...v3.2.0)
+[Full Changelog](https://github.com/T-Systems-MMS/puppet-secc_sshd/compare/3.2.0...v4.0.0)
+
+### Added
+
+- removed ext\_ from args, removed calls to hiera [\#19](https://github.com/T-Systems-MMS/puppet-secc_sshd/pull/19) ([neubi4](https://github.com/neubi4))
+
+## [3.2.0](https://github.com/T-Systems-MMS/puppet-secc_sshd/tree/3.2.0) (2020-10-04)
+
+[Full Changelog](https://github.com/T-Systems-MMS/puppet-secc_sshd/compare/3.1.0...3.2.0)
 
 ### Added
 
