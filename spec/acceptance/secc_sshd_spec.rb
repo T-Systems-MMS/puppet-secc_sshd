@@ -122,5 +122,13 @@ describe 'Class secc_sshd' do
     describe run_shell('ssh -v localhost id 2>&1 | grep "Deprecated option"', expect_failures: true) do
       its(:stdout) { is_expected.not_to include 'Deprecated option' }
     end
+
+    describe run_shell('awk \'$5 < 2048\' /etc/ssh/moduli | grep -q ^') do
+      its(:exit_status) { is_expected.to eq 0 }
+    end
+
+    describe run_shell('awk \'$5 >= 2048\' /etc/ssh/moduli | grep -q " 3071 "') do
+      its(:exit_status) { is_expected.to eq 0 }
+    end
   end
 end
