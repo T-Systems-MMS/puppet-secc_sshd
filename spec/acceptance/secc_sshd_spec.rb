@@ -6,8 +6,8 @@ describe 'Class secc_sshd' do
 
     manifest = <<-EOS
       class { 'secc_sshd':
-        ext_sshd_ChallengeResponseAuthentication  => 'yes',
-        ext_sshd_PermitRootLogin                  => 'yes',
+        sshd_ChallengeResponseAuthentication  => 'yes',
+        sshd_PermitRootLogin                  => 'yes',
       }
     EOS
 

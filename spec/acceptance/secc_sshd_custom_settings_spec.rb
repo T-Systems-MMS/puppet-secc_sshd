@@ -6,14 +6,14 @@ describe 'Class secc_sshd' do
 
     manifest = <<-EOS
       class { 'secc_sshd':
-        ext_listen                                => ['127.0.0.1', '0.0.0.0'],
-        ext_sshd_AllowUsers                       => 'root test',
-        ext_sshd_AllowGroups                      => 'root test',
-        ext_sshd_DenyUsers                        => 'test_deny',
-        ext_sshd_DenyGroups                       => 'test_deny',
-        ext_sshd_ChallengeResponseAuthentication  => 'yes',
-        ext_sshd_PermitRootLogin                  => 'yes',
-        ext_ssh_ForwardAgent                      => 'yes',
+        listen                                => ['127.0.0.1', '0.0.0.0'],
+        sshd_AllowUsers                       => 'root test',
+        sshd_AllowGroups                      => 'root test',
+        sshd_DenyUsers                        => 'test_deny',
+        sshd_DenyGroups                       => 'test_deny',
+        sshd_ChallengeResponseAuthentication  => 'yes',
+        sshd_PermitRootLogin                  => 'yes',
+        ssh_ForwardAgent                      => 'yes',
       }
     EOS
 
