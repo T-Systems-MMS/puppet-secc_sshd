@@ -2,9 +2,22 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [v3.1.0](https://github.com/T-Systems-MMS/puppet-secc_sshd/tree/v3.1.0) (2019-10-20)
+## [v3.2.0](https://github.com/T-Systems-MMS/puppet-secc_sshd/tree/v3.2.0) (2020-10-04)
 
-[Full Changelog](https://github.com/T-Systems-MMS/puppet-secc_sshd/compare/3.0.0...v3.1.0)
+[Full Changelog](https://github.com/T-Systems-MMS/puppet-secc_sshd/compare/3.1.0...v3.2.0)
+
+### Added
+
+- delete small moduli [\#18](https://github.com/T-Systems-MMS/puppet-secc_sshd/pull/18) ([schurzi](https://github.com/schurzi))
+- Updating SOC requirements for \#16 [\#17](https://github.com/T-Systems-MMS/puppet-secc_sshd/pull/17) ([neubi4](https://github.com/neubi4))
+
+### Fixed
+
+- Travis [\#14](https://github.com/T-Systems-MMS/puppet-secc_sshd/pull/14) ([schurzi](https://github.com/schurzi))
+
+## [3.1.0](https://github.com/T-Systems-MMS/puppet-secc_sshd/tree/3.1.0) (2019-10-20)
+
+[Full Changelog](https://github.com/T-Systems-MMS/puppet-secc_sshd/compare/3.0.0...3.1.0)
 
 ### Added
 
@@ -14,6 +27,10 @@ All notable changes to this project will be documented in this file. The format 
 ## [3.0.0](https://github.com/T-Systems-MMS/puppet-secc_sshd/tree/3.0.0) (2019-03-19)
 
 [Full Changelog](https://github.com/T-Systems-MMS/puppet-secc_sshd/compare/2.9.0...3.0.0)
+
+### Added
+
+- remove deprecated protocol v1 options from sshd config, fixing \#10 [\#11](https://github.com/T-Systems-MMS/puppet-secc_sshd/pull/11) ([neubi4](https://github.com/neubi4))
 
 ## [2.9.0](https://github.com/T-Systems-MMS/puppet-secc_sshd/tree/2.9.0) (2019-03-06)
 
@@ -37,7 +54,6 @@ All notable changes to this project will be documented in this file. The format 
 
 ### Added
 
-- remove deprecated protocol v1 options from sshd config, fixing \#10 [\#11](https://github.com/T-Systems-MMS/puppet-secc_sshd/pull/11) ([neubi4](https://github.com/neubi4))
 - Option to allow to control the AgentForwarding setting for ssh\_config [\#6](https://github.com/T-Systems-MMS/puppet-secc_sshd/pull/6) ([rkno82](https://github.com/rkno82))
 - remove banner and motd [\#3](https://github.com/T-Systems-MMS/puppet-secc_sshd/pull/3) ([rndmh3ro](https://github.com/rndmh3ro))
 - translation for issue \#1 [\#2](https://github.com/T-Systems-MMS/puppet-secc_sshd/pull/2) ([rkno82](https://github.com/rkno82))
