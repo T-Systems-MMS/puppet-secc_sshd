@@ -12,6 +12,11 @@
 6. [Limitations - OS compatibility, etc.](#limitations)
 7. [Development - Guide for contributing to the module](#development)
 
+## :warning: Deprecated
+
+This module is deprecated an will no longer be maintained or updated.
+If you still need the functionality, we suggest you use [hardening-ssh_hardening](https://forge.puppet.com/modules/hardening/ssh_hardening).
+
 ## Overview
 
 This module is used widely (on every machine) within T-Systems MMS to ensure compliance to our regulations (Telekom Security), Privacy and Security Assessment - 3_04_Secure_Shell_(SSH). Both, client (ssh) and server (sshd), are covered.
